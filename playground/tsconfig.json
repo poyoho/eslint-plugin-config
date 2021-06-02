@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "declaration": false,
+    // Turn off strict checks to make debugging nicer.
+    "strict": false,
+  },
+}

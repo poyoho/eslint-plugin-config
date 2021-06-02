@@ -11,7 +11,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --testPathIgnorePatterns _work.test",
-    "test-compile": "cross-env USE_COMPLIED=1 yarn test"
+    "test-compile": "cross-env USE_COMPLIED=1 yarn test",
+    "play": "cd playground && ts-node-dev "
   },
   "lint-staged": {
     "*.{ts,vue,tsx,jsx}": "eslint --fix"
@@ -31,6 +32,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^27.0.3",
+    "node-monkey": "^1.1.3",
     "ts-jest": "^27.0.2",
     "typescript": "^4.3.2"
   },
