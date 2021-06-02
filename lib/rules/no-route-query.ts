@@ -1,8 +1,27 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
+import { isMemberExpression, isVariableDeclarator, isIdentifier } from "../utils/node"
 
-// https://cn.eslint.org/docs/developer-guide/working-with-rules
+type MemberExpressWithParent = estree.MemberExpression & Rule.NodeParentExtension
 
+const message = `
+【message】
+使用this.$route.query后维护页面参数会特别困难
+建议使用组件的props传route.query
+
+【usage】
+1. 组件声明props
+[prop]: {
+  type: String
+  default: ""
+}
+2. 路由上调用组件时传参
+{
+  props: route => ({
+    [prop]: route.query[prop],
+  }),
+}
+`
 const rule: Rule.RuleModule = {
   meta: {
     docs: {
@@ -14,19 +33,23 @@ const rule: Rule.RuleModule = {
     ],
     type: "suggestion"
   },
-  // ESLint 在遍历 JavaScript 代码的抽象语法树 AST (ESTree 定义的 AST) 时，用来访问节点的方法
-  // 向下 遍历树时，ESLint 调用 visitor 函数
-  // 在 向上 遍历树时，ESLint 调用 visitor:exit 函数
+  // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    console.log(context)
     return {
-      ThisExpression(node: estree.ThisExpression) {
-        const thisExpression = node
-        console.log("thisExpression", thisExpression)
+      "BlockStatement>VariableDeclaration>MemberExpression"(node: estree.VariableDeclaration) { // 初始化
+        console.log("block.var", node)
+      },
+      // eslint-disable-next-line max-len
+      "BlockStatement>ExpressionStatement>AssignmentExpression[right.type='MemberExpression']"(node: estree.Node) { // 赋值
+        const block = node as estree.BlockStatement
+        console.log("block.assignment", block)
+      },
+      "MemberExpression[property.name = 'query']"(node: estree.MemberExpression) { // 匹配所有 member 如果
+        console.log("member", node)
+        // matchRouteQuery(context, node) // 使用了 this.&route.query
       }
     }
   }
-
 }
 
 export default rule

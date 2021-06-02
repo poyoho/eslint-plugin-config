@@ -16,15 +16,41 @@ NodeMonkey({
 
 ruleTester.run("no-route-query", rule, {
   valid: [
-    { code: "this.hello"},
-    // { code: "this.world"},
-    // { code: "this.hhhhh"},
+    // { code: "() => this.hello.query.name"},
+    // { code: "const email = this.$route"},
+    // { code: "this"},
+    {
+      code: `() => {
+        let a = 20
+        a = this.$route
+        a = 33
+        console.log(a.query)
+      }
+
+      () => {
+        let a = this.a
+        a = {query: "123"}
+        console.log(a.query)
+      }
+      `
+    }
   ],
 
   invalid: [
-    // {
-    //   code: "this.$route.query",
-    //   errors: 1
-    // }
+  //   {
+  //     code: "this.$route.query",
+  //     errors: 1
+  //   },
+  //   {
+  //     code: "this.$route.query.a",
+  //     errors: 1
+  //   },
+  //   {
+  //     code: `
+  //     const route = this.$route
+  //     const b = route.query.a
+  //     `,
+  //     errors: 1
+  //   },
   ]
 })
