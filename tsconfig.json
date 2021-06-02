@@ -1,22 +1,10 @@
 {
-    "compilerOptions": {
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "importHelpers": false,
-      "lib": [
-        "ESNext"
-      ],
-      "module": "ESNext",
-      "moduleResolution": "node",
-      "newLine": "LF",
-      "noEmitOnError": true,
-      "resolveJsonModule": true,
-      "strict": true,
-      "target": "ES2018",
-    },
-    "exclude": [
-        "tests/**/*"
-    ]
-  }
-  
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "./lib",
+    "removeComments": true
+  },
+  "exclude": [
+    "tests/**/*"
+  ]
+}

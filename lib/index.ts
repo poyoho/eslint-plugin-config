@@ -1,8 +1,5 @@
-import requireIndex from "requireindex"
+import noRouteQuery from "./rules/no-route-query"
 
-
-// import all rules in lib/rules
-module.exports.rules = requireIndex(__dirname + "/rules")
-
-
-
+export default [
+  noRouteQuery,
+]
