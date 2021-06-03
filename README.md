@@ -40,6 +40,18 @@ Then configure the rules you want to use under the rules section.
 }
 ```
 
+Or you can use the recommended configuration of rules:
+```json
+{
+  "plugins": [
+    "hhh"
+  ],
+  "extends": [
+    "plugin:hhh/recommended"
+  ]
+}
+```
+
 ## Supported Rules
 
 * Fill in provided rules here

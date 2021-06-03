@@ -1,5 +1,7 @@
-import noRouteQuery from "./rules/no-route-query"
+import rules from "./rules"
+import configs from "./configs"
 
-export default [
-  noRouteQuery,
-]
+export default {
+  rules,
+  configs,
+}

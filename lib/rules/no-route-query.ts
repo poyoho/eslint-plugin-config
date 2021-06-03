@@ -1,6 +1,6 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isMemberExpression } from "../utils/node"
+import { isMemberExpression, isObjectExpression } from "../utils/node"
 
 const message = `
 【message】
@@ -41,8 +41,7 @@ const rule: Rule.RuleModule = {
         if (isMemberExpression(leftUsed)) {
           leftUsed = traverseMemberExpression(leftUsed)
         }
-        const sourceCode = context.getSourceCode()
-        const leftVal = sourceCode.getText(node.object)
+        const leftVal = context.getSourceCode().getText(node.object)
         if (leftVal === "this.$route") { // this.$route.query
           context.report({message, loc: node.loc!})
         } else { // [variable = this.$route].query
@@ -51,7 +50,7 @@ const rule: Rule.RuleModule = {
           if (leftVal.replace(leftVariable, variables[leftVariable]) === "this.$route") {
             context.report({message, loc: node.loc!})
           }
-          // console.log("*.query", leftVal, variables)
+          console.log("*.query", leftVal, variables)
         }
       }
     }
@@ -80,9 +79,11 @@ function cacheScopeVariables() {
       (prev, next) => {
         // 最后一次修改变量
         const lastWrite = next.references.reduce((prev, next) => next.writeExpr || prev, {}) as estree.Node
-        lastWrite.type
-          ? prev[next.name] = context.getSourceCode().getText(lastWrite)
-          : undefined
+        if (lastWrite.type) {
+          if (!isObjectExpression(lastWrite)) {
+            prev[next.name] = context.getSourceCode().getText(lastWrite)
+          }
+        }
         return prev
       }, {} as Record<string, string>
     )
