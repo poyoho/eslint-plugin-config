@@ -4,8 +4,9 @@ module.exports = {
     es6: true,
     node: true
   },
-  plugins: ["config"],
-  rules: {
-    "config/no-route-query": "error"
-  },
+  plugins: ["@poyoho/config"],
+  extends: ["plugin:@poyoho/config/recommended"],
+  // rules: {
+  //   "@poyoho/config/no-route-query": "error",
+  // }
 }

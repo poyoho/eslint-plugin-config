@@ -4,7 +4,7 @@
   },
   "devDependencies": {
     "eslint": "^7.12.1",
-    "eslint-plugin-config": "../../",
+    "@poyoho/eslint-plugin-config": "../../",
     "typescript": "^4.3.2"
   },
   "engines": {

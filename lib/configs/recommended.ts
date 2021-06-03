@@ -1,9 +1,9 @@
 import { Linter } from "eslint"
 
 const config: Linter.Config = {
-  plugins: ["config"],
+  plugins: ["@poyoho/config"],
   rules: {
-    "config/no-route-query": "error"
+    "@poyoho/config/no-route-query": "error"
   }
 }
 
