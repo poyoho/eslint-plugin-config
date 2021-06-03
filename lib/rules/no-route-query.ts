@@ -22,14 +22,11 @@ const message = `
 `
 const rule: Rule.RuleModule = {
   meta: {
+    type: "suggestion",
+    schema: [],
     docs: {
       description: "disable this.$route.query",
-      recommended: false
     },
-    schema: [
-      // fill in your schema
-    ],
-    type: "suggestion"
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
@@ -93,4 +90,4 @@ function cacheScopeVariables() {
   }
 }
 
-export default rule
+export = rule

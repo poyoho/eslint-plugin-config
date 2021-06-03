@@ -1,6 +1,11 @@
 {
+  "lint-staged": {
+    "*.{ts,vue,tsx,jsx,js}": "eslint --fix"
+  },
   "devDependencies": {
-    "@poyoho/eslint-plugin-hhh": "../../"
+    "eslint": "^7.12.1",
+    "eslint-plugin-config": "../../",
+    "typescript": "^4.3.2"
   },
   "engines": {
     "node": ">=0.10.0"

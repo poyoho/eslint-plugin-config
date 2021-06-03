@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "importHelpers": false,
-    "lib": [
-      "ESNext"
-    ],
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "baseUrl": ".",
     "newLine": "LF",
-    "noEmitOnError": true,
-    "resolveJsonModule": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "noEmitHelpers": true,
+    "outDir": "build",
+    "paths": {},
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
     "strict": true,
-    "target": "ES2018",
+    "target": "es2018"
   }
 }

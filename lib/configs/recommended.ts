@@ -1,9 +1,10 @@
 import { Linter } from "eslint"
 
 const config: Linter.Config = {
-  plugins: ["hhh"],
+  plugins: ["config"],
   rules: {
-    "hhh/no-route-query": "error"
+    "config/no-route-query": "error"
   }
 }
-export default config
+
+export = config

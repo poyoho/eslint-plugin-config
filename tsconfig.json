@@ -1,10 +1,13 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "removeComments": true,
     "rootDir": "./lib",
-    "removeComments": true
+    "outDir": "./dist",
+    "module": "commonjs"
   },
   "exclude": [
-    "tests/**/*"
+    "tests/**/*",
+    "playground/**/*"
   ]
 }

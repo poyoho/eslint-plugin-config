@@ -1,7 +1,8 @@
-import rules from "./rules"
-import configs from "./configs"
-
-export default {
-  rules,
-  configs,
+export = {
+  rules: {
+    "no-route-query": require("./rules/no-route-query")
+  },
+  configs: {
+    recommended: require("./configs/recommended") // 推荐配置
+  },
 }

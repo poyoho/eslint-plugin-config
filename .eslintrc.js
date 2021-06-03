@@ -33,6 +33,12 @@ module.exports = {
     sourceType: "module",
   },
   /**
+    * 配置插件
+    * @description 配置插件名字，可以省略'eslint-plugin-'前缀
+    * @description 使用前要用npm安装
+    */
+  plugins: ["@typescript-eslint"],
+  /**
    * 共享规则配置
    */
   settings: {
@@ -51,12 +57,6 @@ module.exports = {
       },
     },
   },
-  /**
-    * 配置插件
-    * @description 配置插件名字，可以省略'eslint-plugin-'前缀
-    * @description 使用前要用npm安装
-    */
-  plugins: ["@typescript-eslint"],
   /**
    * 配置规则
    * @description 常用规则官网：http://eslint.cn/docs/rules/

@@ -1,5 +1,5 @@
 {
-  "name": "@poyoho/eslint-plugin-hhh",
+  "name": "eslint-plugin-config",
   "version": "0.0.0",
   "description": "eslint plugin for myself",
   "keywords": [
@@ -7,12 +7,17 @@
     "eslintplugin",
     "eslint-plugin"
   ],
+  "files": [
+    "dist",
+    "docs"
+  ],
   "author": "poyoho",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest --testPathIgnorePatterns _work.test",
     "test-compile": "cross-env USE_COMPLIED=1 yarn test",
-    "play": "cd playground && ts-node-dev"
+    "play": "cd playground/rules && ts-node-dev",
+    "build": "tsc -p tsconfig.json"
   },
   "lint-staged": {
     "*.{ts,vue,tsx,jsx}": "eslint --fix"

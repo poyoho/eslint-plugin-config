@@ -1,4 +1,3 @@
-import { Rule } from "eslint"
 import * as estree from "estree"
 
 const MODULE_DECLARATION_NODES = [
