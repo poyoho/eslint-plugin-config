@@ -10,7 +10,7 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `eslint-plugin-hhh`:
+Next, install `@poyoho/eslint-plugin-hhh`:
 
 ```
 $ npm install eslint-plugin-hhh --save-dev

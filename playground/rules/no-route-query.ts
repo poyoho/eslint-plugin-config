@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import rule from "../lib/rules/no-route-query"
+import rule from "../../lib/rules/no-route-query"
 const NodeMonkey = require("node-monkey")
 
 // eslint rule 测试容器
