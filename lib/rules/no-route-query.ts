@@ -1,8 +1,6 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isMemberExpression, isVariableDeclarator, isIdentifier } from "../utils/node"
-
-type MemberExpressWithParent = estree.MemberExpression & Rule.NodeParentExtension
+import { isMemberExpression } from "../utils/node"
 
 const message = `
 【message】
@@ -35,69 +33,63 @@ const rule: Rule.RuleModule = {
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    const variable: Record<string, string> = {}
-    let blockVariable: Record<string, string> = {}
-    let isBlock = false
-
+    const scopeVariabler = cacheScopeVariables()
     return {
-      BlockStatement() { // 块级作用于开始
-        console.log("block.start")
-        isBlock = true
-        blockVariable = {}
-      },
-      "BlockStatement:exit"() { // 块级作用域结束
-        console.log("block.exit")
-        isBlock = false
-        blockVariable = {}
-      },
-
-      AssignmentExpression(node) { // 赋值
-        console.log("AssignmentExpression", node)
-      },
-
-      // ThisExpression(node) {
-      //   if (isVariableDeclarator(node.parent)) { // 用于被赋值 const x = this
-      //     blockVariable[(node.parent.id as estree.Identifier).name] = "this"
-      //   } else if (
-      //     isMemberExpression(node.parent)
-      //     && (node.parent.property as estree.Identifier).name === "$route"
-      //   ) { // 获取成员值 this.$route
-      //     const rootExpression = traverseMemberExpression(node.parent)
-      //     const thisExpression = context.getSourceCode()
-      //       .getTokens(rootExpression)
-      //       .reduce((prev, next) => prev += next.value, "")
-      //     console.log(rootExpression)
-      //     if (isVariableDeclarator(rootExpression.parent)) { // 赋值
-      //       // blockVariable[rootExpression.] = "this"
-      //     } else if (thisExpression === "this.$route.query") {
-      //       console.log("report")
-      //     }
-      //   }
-      // },
-
-      "MemberExpression[property.name = 'query']"(node: estree.MemberExpression) { // 匹配所有 member 如果
-        console.log("use *.query")
-        // console.log("member", node.object)
-        // matchRouteQuery(context, node) // 使用了 this.&route.query
+      // *.query
+      "MemberExpression[property.name = 'query']"(node: estree.MemberExpression) {
+        let leftUsed = node.object as estree.Node
+        if (isMemberExpression(leftUsed)) {
+          leftUsed = traverseMemberExpression(leftUsed)
+        }
+        const sourceCode = context.getSourceCode()
+        const leftVal = sourceCode.getText(node.object)
+        if (leftVal === "this.$route") { // this.$route.query
+          context.report({message, loc: node.loc!})
+        } else { // [variable = this.$route].query
+          const variables = scopeVariabler(context)
+          const leftVariable = leftVal.split(".")[0]
+          if (leftVal.replace(leftVariable, variables[leftVariable]) === "this.$route") {
+            context.report({message, loc: node.loc!})
+          }
+          // console.log("*.query", leftVal, variables)
+        }
       }
     }
   }
 }
 
 // 遍历Member获取完整访问路径
-function traverseMemberExpression(node: MemberExpressWithParent): estree.Node {
-  if (isMemberExpression(node.parent)) {
-    return traverseMemberExpression(node.parent)
+function traverseMemberExpression(node: estree.MemberExpression): estree.Node {
+  if (isMemberExpression(node.object)) {
+    return traverseMemberExpression(node.object)
   }
-  return node
+  return node.object
 }
 
-// 上报错误
-function report(context: Rule.RuleContext, node: estree.Node) {
-  context.report({
-    message,
-    loc: node.loc!
-  })
+// 缓存作用域内的变量
+function cacheScopeVariables() {
+  const _cache = new WeakMap()
+  return (context: Rule.RuleContext) => {
+    const scope = context.getScope()
+    let variables: Record<string, string>
+    if ((variables = _cache.get(scope))) {
+      return variables
+    }
+    // 作用域下所有变量
+    variables = scope.variables.reduce(
+      (prev, next) => {
+        // 最后一次修改变量
+        const lastWrite = next.references.reduce((prev, next) => next.writeExpr || prev, {}) as estree.Node
+        lastWrite.type
+          ? prev[next.name] = context.getSourceCode().getText(lastWrite)
+          : undefined
+        return prev
+      }, {} as Record<string, string>
+    )
+    // 缓存当前作用域所有变量定义
+    _cache.set(scope, variables)
+    return variables
+  }
 }
 
 export default rule
