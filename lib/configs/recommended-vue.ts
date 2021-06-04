@@ -1,7 +1,7 @@
 import { Linter } from "eslint"
 
 const config: Linter.Config = {
-  parser: "vue-eslint-parser",
+  parser: require.resolve("vue-eslint-parser"),
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: "module"
@@ -11,8 +11,10 @@ const config: Linter.Config = {
     es6: true
   },
   plugins: ["@poyoho/config", "vue"],
-  extends: [],
-  rules: {
+  extends: [
+    "plugin:vue/recommended" // vue推荐配置
+  ],
+  rules: { // 自定义插件库推荐配置
     "@poyoho/config/vue/no-route-query": "error"
   }
 }

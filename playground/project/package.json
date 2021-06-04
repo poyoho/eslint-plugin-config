@@ -3,9 +3,8 @@
     "*.{ts,vue,tsx,jsx,js}": "eslint --fix"
   },
   "devDependencies": {
-    "eslint": "^7.12.1",
     "@poyoho/eslint-plugin-config": "../../",
-    "typescript": "^4.3.2"
+    "eslint-plugin-vue": "^7.10.0"
   },
   "engines": {
     "node": ">=0.10.0"
