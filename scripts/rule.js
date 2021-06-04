@@ -8,7 +8,7 @@
  */
 // 默认文档
 const DOC =
-`# $DESC ($NAME)
+`## $DESC ($NAME)
 
 // full it
 
