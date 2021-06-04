@@ -1,5 +1,5 @@
 import { Rule } from "eslint"
-import { makeMap } from "lib/utils/makeMap"
+import { makeMap } from "../../utils/makeMap"
 
 const EVENT_NAME =
   "abort,animationcancel,animationend,animationiteration,animationstart,auxclick,beforeinput,"+
