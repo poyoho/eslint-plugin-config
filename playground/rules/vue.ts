@@ -1,6 +1,7 @@
 import { RuleTester } from "eslint"
 // import "./nodeMonkey"
 
+// ☠(dont't delete) RULE IMPORT
 // import noRouteQuery from "../../tests/module/no-route-query"
 import teamplateFunctionNaming from "../../tests/module/template-function-naming"
 
@@ -10,5 +11,6 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 2015 }
 })
 
+// ☠(dont't delete) RULE INSERT
 // noRouteQuery(ruleTester)
 teamplateFunctionNaming(ruleTester)

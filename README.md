@@ -10,10 +10,10 @@ You'll first need to install [ESLint](http://eslint.org):
 $ npm i eslint --save-dev
 ```
 
-Next, install `@poyoho/eslint-plugin-hhh`:
+Next, install `@poyoho/eslint-plugin-config`:
 
 ```
-$ npm install eslint-plugin-hhh --save-dev
+$ npm install eslint-plugin-config --save-dev
 ```
 
 
@@ -24,7 +24,7 @@ Add `hhh` to the plugins section of your `.eslintrc` configuration file. You can
 ```json
 {
     "plugins": [
-        "hhh"
+        "@poyoho/config"
     ]
 }
 ```
@@ -35,7 +35,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "hhh/rule-name": 2
+        "@poyoho/config/rule-name": 2
     }
 }
 ```
@@ -44,17 +44,21 @@ Or you can use the recommended configuration of rules:
 ```json
 {
   "plugins": [
-    "hhh"
+    "@poyoho/config"
   ],
   "extends": [
-    "plugin:hhh/recommended"
+    "plugin:@poyoho/config/js",
+    "plugin:@poyoho/config/ts",
+    "plugin:@poyoho/config/vue",
+    "plugin:@poyoho/config/vuets",
   ]
 }
 ```
 
 ## Supported Rules
 
-* Fill in provided rules here
+* [no-route-query](./docs/rules/no-route-query.md)
+* [template-function-naming](./docs/rules/template-function-naming)
 
 
 

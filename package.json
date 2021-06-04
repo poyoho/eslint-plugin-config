@@ -17,9 +17,10 @@
     "test": "jest --testPathIgnorePatterns _work.test",
     "test-compile": "cross-env USE_COMPLIED=1 yarn test",
     "build": "tsc -p tsconfig.json",
-    "play": "cd playground/rules && yarn && ts-node-dev ./main.ts",
-    "play:log": "cd playground/rules && ts-node-dev ./main.ts --logserve",
-    "release": "node ./script/release.js"
+    "play": "cd playground/rules && yarn && ts-node-dev ./vue.ts",
+    "play:log": "cd playground/rules && ts-node-dev ./vue.ts --logserve",
+    "release": "node ./scripts/release.js",
+    "gen:rule": "node ./scripts/rule.js"
   },
   "lint-staged": {
     "*.{ts,vue,tsx,jsx}": "eslint --fix"
