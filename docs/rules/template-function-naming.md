@@ -1,9 +1,9 @@
-# 模板函数命名规范 (template-function-naming)
+## 模板函数命名规范 (template-function-naming)
 
 方法命名-[操作行为](https://developer.mozilla.org/zh-CN/docs/Web/Events)以行为标识做开头，且方法名前面写上对应注释，操作行为不能被其它方法直接调用。
 
 
-## 实例
+## 事例
 
 此规则的**错误**代码示例：
 

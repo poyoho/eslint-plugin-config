@@ -1,4 +1,4 @@
-# 禁止使用 `this.$route.query` (no-route-query)
+## 禁止使用 `this.$route.query` (no-route-query)
 
 禁止使用`this.$route.query`
 
@@ -6,7 +6,7 @@
 
 应该使用组件的props传route.query，因为修改涉及多个页面，需要手动修改，所以只发出建议。
 
-## 实例
+## 事例
 
 此规则的**错误**代码示例：
 
