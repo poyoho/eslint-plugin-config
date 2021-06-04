@@ -1,36 +1,62 @@
-# disable this.$route.query (no-route-query)
+# 禁止使用 `this.$route.query` (no-route-query)
 
-Please describe the origin of the rule here.
+禁止使用`this.$route.query`
 
+使用`this.$route.query`后维护页面的时候都不知道这个页面还可以接受参数
 
-## Rule Details
+应该使用组件的props传route.query，因为修改涉及多个页面，需要手动修改，所以只发出建议。
 
-This rule aims to...
+## 实例
 
-Examples of **incorrect** code for this rule:
-
-```js
-
-// fill me in
-
-```
-
-Examples of **correct** code for this rule:
+此规则的**错误**代码示例：
 
 ```js
-
-// fill me in
-
+{
+  methods: {
+    clickSubmit() {
+      const { world } = this.$route.query
+      fetchSubmit({
+        hello: this.$route.query.hello,
+        world,
+      })
+    }
+  }
+}
 ```
 
-### Options
+此规则的**正确**代码示例：
 
-If there are any options, describe them here. Otherwise, delete this section.
+1. 组件声明props
+```js
+{
+  props: {
+    hello: {
+      type: String,
+      defalut: ""
+    },
+    world: {
+      type: String,
+      defalut: ""
+    }
+  },
+  methods: {
+    clickSubmit() {
+      fetchSubmit({
+        hello: this.hello,
+        world,
+      })
+    }
+  }
+}
+```
 
-## When Not To Use It
+2. 路由上调用组件时传参
 
-Give a short description of when it would be appropriate to turn off this rule.
-
-## Further Reading
-
-If there are other links that describe the issue this rule addresses, please include them here in a bulleted list.
+```js
+{
+  props: route => ({
+    hello: route.query.hello,
+    world: route.query.world,
+  }),
+}
+```

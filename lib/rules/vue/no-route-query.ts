@@ -1,7 +1,7 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isMemberExpression, isObjectExpression } from "../../utils/node"
-import { traverseMemberObject } from "../../utils/traverse"
+import { isMemberExpression, isObjectExpression } from "lib/utils/node"
+import { traverseMemberObject } from "lib/utils/traverse"
 
 const message = `
 【message】
@@ -54,8 +54,6 @@ const rule: Rule.RuleModule = {
     }
   }
 }
-
-
 
 // 缓存作用域内的变量
 function cacheScopeVariables() {
