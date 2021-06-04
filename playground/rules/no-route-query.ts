@@ -1,18 +1,26 @@
 import { RuleTester } from "eslint"
-import rule from "../../lib/rules/no-route-query"
-const NodeMonkey = require("node-monkey")
+import rule from "../../lib/rules/vue/no-route-query"
+
+// const NodeMonkey = require("node-monkey")
+// // 使用浏览器console输出 guest/guest
+// NodeMonkey({
+//   server: {
+//     disableLocalOutput: false,
+//     host: "localhost",
+//     port: 999,
+//   },
+//   dataDir: "admin"
+// }, "ninja")
 
 // eslint rule 测试容器
-const ruleTester = new RuleTester({parserOptions: { ecmaVersion: 10 }})
-// 使用浏览器console输出 guest/guest
-NodeMonkey({
-  server: {
-    disableLocalOutput: false,
-    host: "localhost",
-    port: 999,
+const ruleTester = new RuleTester({
+  parser: "vue-eslint-parser",
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module"
   },
-  dataDir: "admin"
-}, "ninja")
+})
+
 ruleTester.run("no-route-query", rule, {
   valid: [
     { code: "() => this.hello.query.name"},

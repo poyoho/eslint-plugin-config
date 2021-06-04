@@ -1,6 +1,7 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isMemberExpression, isObjectExpression } from "../utils/node"
+import { isMemberExpression, isObjectExpression } from "../../utils/node"
+import { traverseMemberObject } from "../../utils/traverse"
 
 const message = `
 【message】
@@ -36,7 +37,7 @@ const rule: Rule.RuleModule = {
       "MemberExpression[property.name = 'query']"(node: estree.MemberExpression) {
         let leftUsed = node.object as estree.Node
         if (isMemberExpression(leftUsed)) {
-          leftUsed = traverseMemberExpression(leftUsed)
+          leftUsed = traverseMemberObject(leftUsed)
         }
         const leftVal = context.getSourceCode().getText(node.object)
         if (leftVal === "this.$route") { // this.$route.query
@@ -54,13 +55,7 @@ const rule: Rule.RuleModule = {
   }
 }
 
-// 遍历Member获取完整访问路径
-function traverseMemberExpression(node: estree.MemberExpression): estree.Node {
-  if (isMemberExpression(node.object)) {
-    return traverseMemberExpression(node.object)
-  }
-  return node.object
-}
+
 
 // 缓存作用域内的变量
 function cacheScopeVariables() {

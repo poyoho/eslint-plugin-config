@@ -4,8 +4,9 @@ module.exports = {
     es6: true,
     node: true
   },
+  parse: "",
   plugins: ["@poyoho/config"],
-  extends: ["plugin:@poyoho/config/recommended"],
+  extends: ["plugin:@poyoho/config/recommended-vue"],
   // rules: {
   //   "@poyoho/config/no-route-query": "error",
   // }

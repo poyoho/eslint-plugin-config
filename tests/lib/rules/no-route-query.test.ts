@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import rule from "../../../lib/rules/no-route-query"
+import rule from "../../../lib/rules/vue/no-route-query"
 
 const ruleTester = new RuleTester({parserOptions: { ecmaVersion: 10 }})
 
