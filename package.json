@@ -17,7 +17,7 @@
     "test": "jest --testPathIgnorePatterns _work.test",
     "test-compile": "cross-env USE_COMPLIED=1 yarn test",
     "build": "tsc -p tsconfig.json",
-    "play": "cd playground/rules && yarn && ts-node-dev ./vue.ts",
+    "play": "cd playground/rules && ts-node-dev ./vue.ts",
     "play:log": "cd playground/rules && ts-node-dev ./vue.ts --logserve",
     "gen:rule": "node ./scripts/rule.js",
     "doc:dev": "vitepress dev docs",

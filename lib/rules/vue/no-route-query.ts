@@ -27,6 +27,7 @@ const rule: Rule.RuleModule = {
     schema: [],
     docs: {
       description: "disable this.$route.query",
+      url: "https://poyoho.github.io/eslint-plugin-config/rules/no-route-query.html"
     },
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules

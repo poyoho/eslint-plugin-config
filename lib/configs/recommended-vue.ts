@@ -15,7 +15,8 @@ const config: Linter.Config = {
     "plugin:vue/recommended" // vue推荐配置
   ],
   rules: { // 自定义插件库推荐配置
-    "@poyoho/config/vue/no-route-query": "error"
+    "@poyoho/config/vue/no-route-query": "warn",
+    "@poyoho/config/vue/template-function-naming": "warn",
   }
 }
 

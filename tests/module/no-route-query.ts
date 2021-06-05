@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import rule from "lib/rules/vue/no-route-query"
+import rule from "../../lib/rules/vue/no-route-query"
 
 export default (ruleTester: RuleTester) =>
   ruleTester.run("no-route-query", rule, {
