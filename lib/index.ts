@@ -2,14 +2,14 @@ export = {
   rules: {
     // vue
     "vue/no-route-query": require("./rules/vue/no-route-query"),
-    // js
-    // ts
+    "vue/template-function-naming": require("./rules/vue/template-function-naming"),
+    // js ts jsx tsx
     "js/no-binocular-logic": require("./rules/ts/no-binocular-logic")
   },
   configs: {
-    js: require("./configs/recommended-js"), // 推荐配置
-    ts: require("./configs/recommended-ts"), // 推荐配置
-    vue: require("./configs/recommended-vue"), // 推荐配置
-    vuets: require("./configs/recommended-vuets") // 推荐配置
+    js: require("./configs/recommended-js"),
+    ts: require("./configs/recommended-ts"),
+    vue: require("./configs/recommended-vue"),
+    vuets: require("./configs/recommended-vuets")
   },
 }

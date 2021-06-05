@@ -67,6 +67,7 @@ const rule: Rule.RuleModule = {
     schema: [],
     docs: {
       description: "$DESC",
+      url: "https://poyoho.github.io/eslint-plugin-config/rules/$NAME.html"
     },
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules

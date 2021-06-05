@@ -1,7 +1,7 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isMemberExpression, isObjectExpression } from "lib/utils/node"
-import { traverseMemberObject } from "lib/utils/traverse"
+import { isMemberExpression, isObjectExpression } from "../../utils/node"
+import { traverseMemberObject } from "../../utils/traverse"
 
 const message = `
 【message】
@@ -27,6 +27,7 @@ const rule: Rule.RuleModule = {
     schema: [],
     docs: {
       description: "disable this.$route.query",
+      url: "https://poyoho.github.io/eslint-plugin-config/rules/no-route-query.html"
     },
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules

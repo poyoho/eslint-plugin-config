@@ -25,7 +25,8 @@ const config: Linter.Config = {
     "plugin:@typescript-eslint/recommended" // ts默认配置
   ],
   rules: { // 自定义插件库推荐配置
-    "@poyoho/config/vue/no-route-query": "error"
+    "@poyoho/config/vue/no-route-query": "warn",
+    "@poyoho/config/vue/template-function-naming": "warn",
   },
   overrides: [
     {
