@@ -1,31 +1,25 @@
 <template>
   <div>
-    <input @enter="enterInputName">
-    <a @click="clickSubmit">提交</a>
-    <!-- 错误函数定义 -->
-    <a
-      @click="aaaSubmit"
-      @enter="() => {}"
-      @test="click"
-    >提交</a>
+    <input
+      @enter="enterInputName"
+      @update="updateAaaaAaaaUL"
+      @a-b-c="adasd"
+    >
   </div>
 </template>
-
 <script lang="ts">
 export default {
   methods: {
-    // 点击-提交
-    clickSubmit (): void {
+    updateAaaaAaaaUL: (): void => {
       //
     },
-
-    // 回车-提交
-    enterInputName (): void {
-      this.clickSubmit() // 错误写法
+    b: (): void => {
+      //
     },
-
-    // 错误定义 必须为
-    aaaSubmit(): void {
+    c(): void {
+      this.updateAaaaAaaaUL()
+    },
+    adasd(): void {
       //
     }
   }

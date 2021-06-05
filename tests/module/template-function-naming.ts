@@ -12,12 +12,15 @@ export default (ruleTester: RuleTester) =>
             <input @enter="enterInputName">
         </div>
         </template>
-
         <script>
+        function aaa() {}
+        aaa()
         export default {
           methods: {
-            // 回车-提交
             enterInputName () {},
+            bbb() {
+              this.a.ccc()
+            }
           }
         }
         </script>`
@@ -25,83 +28,74 @@ export default (ruleTester: RuleTester) =>
       {
         filename: "test.vue",
         code: `
-        <template>
-        <div>
-            <input @ggg="gggInputName">
-        </div>
-        </template>
+          <template>
+          <div>
+              <input @bbb="bbbInputName">
+          </div>
+          </template>
 
-        <script>
-        export default {
-          methods: {
-            gggInputName () {},
+          <script>
+          export default {
+            methods: {
+              bbbInputName () {},
+            }
           }
-        }
-        </script>`
-      }
-    ],
+          </script>`
+      },
+      {
+        filename: "test.vue",
+        code: `
+          <template>
+          <div>
+              <input @a-b-c="bbbInputName">
+          </div>
+          </template>
 
+          <script>
+          export default {
+            methods: {
+              bbbInputName () {},
+            }
+          }
+          </script>`
+      },
+    ],
     invalid: [
       {
         filename: "test.vue",
         code: `
         <template>
         <div>
-            <input @enter="aaaInputName">
+            <input @enter="aaaInputName" @update-user-name="bbbUserName">
         </div>
         </template>
 
         <script>
         export default {
           methods: {
-            // 回车-提交
             aaaInputName () {}, // ❌
+            bbbUserName () {}, // ❌
           }
         }
         </script>
         `,
-        errors: 1
-      },
-      {
-        filename: "test.vue",
-        code: `
+        output: `
         <template>
         <div>
-            <input @enter="enterInputName">
+            <input @enter="enterAaaInputName" @update-user-name="bbbUserName">
         </div>
         </template>
 
         <script>
         export default {
           methods: {
-            enterInputName () {},
-            hello() {
-              this.enterInputName() // ❌
-            }
+            enterAaaInputName () {}, // ❌
+            bbbUserName () {}, // ❌
           }
         }
         </script>
         `,
-        errors: 1
+        errors: 4
       },
-      {
-        filename: "test.vue",
-        code: `
-        <template>
-        <div>
-            <input @enter="aaaInputName">
-        </div>
-        </template>
-
-        <script>
-        function aaaInputName () {} // ❌
-        export default {
-          methods: {
-          }
-        }
-        </script>
-        `,
-        errors: 1
-      }
     ]
   })
