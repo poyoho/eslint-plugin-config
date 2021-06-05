@@ -25,6 +25,12 @@ const DOC =
 \`\`\`html
 // full it
 \`\`\``
+// 文档路由
+const DOC_ROUTE =
+`{
+  text: "$NAME",
+  link: "/rules/$NAME"
+},`
 // playgrond 引入
 const PLAYMAIN_IMPORT = `import $HUMP from "../../tests/module/$NAME"`
 // playground 插入
@@ -147,10 +153,23 @@ async function input() {
 function genDoc(variables) {
   console.log(chalk.blue("gen doc"))
   const doc = replaceModule(DOC, variables)
+  const ruleRoute = replaceModule(DOC_ROUTE, variables)
   // new doc
   fs.writeFileSync(
     path.join(__dirname, "..", "docs/rules/", variables.$NAME+".md"),
     doc,
+    { encoding: "utf-8" }
+  )
+
+  // insert doc route
+  const docRoutePath = path.join(__dirname, "..", "docs/.vitepress/route/rules.js")
+  let docRoute = fs.readFileSync(docRoutePath, { encoding: "utf-8" })
+  docRoute = variables.$TYPE === "vue"
+    ? docRoute.replace("// ☠(dont't delete) VUE INSERT", "// ☠(dont't delete) VUE INSERT\n"+ruleRoute)
+    : docRoute.replace("// ☠(dont't delete) JS INSERT", "// ☠(dont't delete) JS INSERT\n"+ruleRoute)
+  fs.writeFileSync(
+    docRoutePath,
+    docRoute,
     { encoding: "utf-8" }
   )
 }
