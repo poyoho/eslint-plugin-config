@@ -181,10 +181,10 @@ function genPlayMain(variables) {
   const playmainImport = replaceModule(PLAYMAIN_IMPORT, variables)
   const playmainInsert = replaceModule(PLAYMAIN_INSERT, variables)
   // playground rules
-  const playgroundRuleScriptPath = path.join(__dirname, "..", "playground/rules/vue.ts")
+  const playgroundRuleScriptPath = path.join(__dirname, "..", `playground/rules/${variables.$TYPE}.ts`)
   const script = fs.readFileSync(playgroundRuleScriptPath, { encoding: "utf-8" })
-    .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s(.*)/m, (s, s1) => s.replace(s1, `${playmainImport}\r\n// ${s1}`))
-    .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s(.*)/m, (s, s1) => s.replace(s1, `${playmainImport}\r\n// ${s1}`))
+    .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainImport}\n// ${s1}`))
+    .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainInsert}\n// ${s1}`))
 
   fs.writeFileSync(
     playgroundRuleScriptPath,
