@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "rule",
         "doc",
-        "playground"
+        "playground",
+        "stat"
     ]
 }
