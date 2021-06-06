@@ -1,7 +1,7 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
 import { AST } from "vue-eslint-parser"
-import { defineTemplateBodyVisitor, defineVueOptionFunctionVisitor, compositingVisitors } from "../../visitors"
+import { defineTemplateBodyVisitor, defineVueFnIdentifierVisitor, compositingVisitors } from "../../visitors"
 import { makeMap } from "../../utils/makeMap"
 import { isVIdentifier } from "../../utils/vue-node"
 
@@ -64,7 +64,7 @@ const rule: Rule.RuleModule = {
       },
       compositingVisitors(
         // vue option下定义函数
-        defineVueOptionFunctionVisitor(context, (node) => {
+        defineVueFnIdentifierVisitor(context, (node) => {
           const called = variFunction.get(node.name)
           called
             ? called.push(node)

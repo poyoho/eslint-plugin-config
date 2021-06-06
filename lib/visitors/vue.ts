@@ -1,38 +1,41 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
 import * as tsnode from "../utils/ts-node"
-import { isArrowFunctionExpression, isFunctionExpression, isIdentifier } from "../utils/node"
+import { isArrowFunctionExpression, isFunctionExpression, isIdentifier, isProperty } from "../utils/node"
 import { getScopeVariables } from "../utils/getter"
 import { VueObjectType, getVueObjectType } from "../utils/vue-node"
 
-const optionMethods = 'ExportDefaultDeclaration Property[key.name="methods"]'
-const optionSetup = 'ExportDefaultDeclaration Property[key.name="setup"]'
+const optionMethodsProperty = 'ExportDefaultDeclaration Property[key.name="methods"]'
+const optionWatchProperty = 'ExportDefaultDeclaration Property[key.name="watch"]'
+const optionComputedProperty = 'ExportDefaultDeclaration Property[key.name="computed"]'
+const optionDataBlock = 'ExportDefaultDeclaration Property[key.name="data"]>*>BlockStatement'
+const optionSetupBlock = 'ExportDefaultDeclaration Property[key.name="setup"]>*>BlockStatement'
 
 // 在setup / methods 定义函数
-export function defineVueOptionFunctionVisitor(
+export function defineVueFnIdentifierVisitor(
   context: Rule.RuleContext,
   cb: (node: estree.Identifier) => void,
 ): Rule.RuleListener {
   const cacheFnDef: Record<string, estree.Identifier> = {}
   let cacheVarDef: Record<string, estree.Identifier> = {}
   return {
-    // option.methods 定义函数 / 匿名函数
-    [`${optionMethods} Property[value.type=/^(Arrow)?FunctionExpression$/] > Identifier`](
+    // option.methods 定义函数 / 匿名函数 methods: { ⭐() {}, ⭐ => {} }
+    [`${optionMethodsProperty} Property[value.type=/^(Arrow)?FunctionExpression$/] > Identifier`](
       node: estree.Identifier) {
       cb(node)
     },
-    // setup里面的block 获取变量声明
-    [`${optionSetup}>*>BlockStatement`]() {
+    // setup里面的block 获取变量声明 setup() {⭐}
+    [optionSetupBlock]() {
       cacheVarDef = getScopeVariables<estree.Identifier>(context, {
         filter: isIdentifier,
       })
     },
-    // setup里面的函数定义
-    [`${optionSetup} FunctionDeclaration>Identifier`](node: estree.Identifier) {
+    // setup里面的函数定义 setup(){ function ⭐() {}}
+    [`${optionSetupBlock} FunctionDeclaration>Identifier`](node: estree.Identifier) {
       cacheFnDef[node.name] = node
     },
-    // return的时候定义变量
-    [`${optionSetup} ReturnStatement Property`](
+    // return的时候定义变量 setup(){ return {⭐} }
+    [`${optionSetupBlock}>ReturnStatement Property`](
       node: estree.Property) {
       if (!isIdentifier(node.key)) {
         return
@@ -62,6 +65,38 @@ export function defineVueOptionFunctionVisitor(
         }
       }
     },
+  }
+}
+
+// vue 暴露给模板的数据 ObjectExpression
+export function defineVueExposeVisitor(
+  context: Rule.RuleContext,
+  cb: (node: estree.ObjectExpression) => void
+): Rule.RuleListener {
+  return {
+    [`${optionSetupBlock}>ReturnStatement ObjectExpression`]( // setup() {return {⭐}}
+      node: estree.ObjectExpression) {
+      cb(node)
+    },
+    [`${optionMethodsProperty} ObjectExpression`]( // methods: {⭐}
+      node: estree.ObjectExpression) {
+      cb(node)
+    },
+    [`${optionDataBlock}>ReturnStatement ObjectExpression`]( // data() {return {⭐}}
+      node: estree.ObjectExpression
+    ){
+      cb(node)
+    },
+    [`${optionWatchProperty} ObjectExpression`]( // watch: {⭐}
+      node: estree.ObjectExpression
+    ){
+      cb(node)
+    },
+    [`${optionComputedProperty} ObjectExpression`]( // computed: {⭐}
+      node: estree.ObjectExpression
+    ){
+      cb(node)
+    }
   }
 }
 

@@ -39,7 +39,7 @@ const PLAYMAIN_INSERT = `$HUMP(ruleTester)`
 const RULE_MODULE =
 `
 import { RuleTester } from "eslint"
-import rule from "lib/rules/$TYPE/$NAME"
+import rule from "../../lib/rules/$TYPE/$NAME"
 
 export default (ruleTester: RuleTester) =>
   ruleTester.run("$NAME", rule, {
