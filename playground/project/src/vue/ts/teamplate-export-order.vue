@@ -27,7 +27,7 @@ export default defineComponent({
       ...b,
       [aaa]: reactive(aaa),
       ...c,
-      "aaa": 1,
+      "aaa-bb-c": 1,
       ...a,
       99: 123,
       a,

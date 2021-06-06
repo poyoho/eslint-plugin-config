@@ -5,14 +5,29 @@ import rule from "../../lib/rules/vue/teamplate-export-order"
 export default (ruleTester: RuleTester) =>
   ruleTester.run("teamplate-export-order", rule, {
     valid: [
-
+      {
+        filename: "test.vue",
+        code: `
+        <script>
+        export default {
+          setup(props) {
+            return {
+              a,
+              b,
+              c,
+            }
+          }
+        }
+        </script>
+        `
+      }
     ],
 
     invalid: [
       {
         filename: "test.vue",
         code: `
-        <script>
+        <>
         export default defineComponent({
           setup(props) {
             const a = reactive({
@@ -47,10 +62,10 @@ export default (ruleTester: RuleTester) =>
             }
           },
         })
-        </script>
+        </>
         `,
         output: `
-        <script>
+        <>
         export default defineComponent({
           setup(props) {
             const a = reactive({
@@ -85,7 +100,7 @@ export default (ruleTester: RuleTester) =>
             }
           },
         })
-        </script>
+        </>
         `,
         errors: 1
       }
