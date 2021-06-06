@@ -1,17 +1,22 @@
-## 禁止在三目运算符进行逻辑运算 (no-binocular-logic)
+## 三目运算符不参与复杂逻辑 (no-binocular-logic)
 
-// full it
+确保三目运算符不参与复杂逻辑。
 
 ## 事例
 
 此规则的**错误**代码示例：
 
-```html
-// full it
+```js
+isActive ? banner.show() && user.login() : banner.hide()
 ```
 
 此规则的**正确**代码示例：
 
-```html
-// full it
+```js
+if (isActive) {
+  banner.show()
+  user.login()
+} else {
+  banner.hide()
+}
 ```
