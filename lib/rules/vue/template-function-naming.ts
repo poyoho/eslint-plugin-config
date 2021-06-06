@@ -1,9 +1,9 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
 import { AST } from "vue-eslint-parser"
+import { defineTemplateBodyVisitor, defineVueOptionFunctionVisitor, compositingVisitors } from "../../visitors"
 import { makeMap } from "../../utils/makeMap"
 import { isVIdentifier } from "../../utils/vue-node"
-import { defineVueOptionFunction } from "../../utils/selector"
 
 const EVENT_NAME =
   "abort,animationcancel,animationend,animationiteration,animationstart,auxclick,beforeinput,"+
@@ -43,7 +43,8 @@ const rule: Rule.RuleModule = {
     let methodsObjectExpression: estree.ObjectExpression
     const callFunction = new Map<string, estree.Identifier[]>()
     const variFunction = new Map<string, estree.Identifier[]>()
-    return context.parserServices.defineTemplateBodyVisitor(
+    return defineTemplateBodyVisitor(
+      context,
       {
         "VAttribute[directive=true][key.name.name='on'] > VExpressionContainer"(
           node: AST.VExpressionContainer & { parent: any }
@@ -61,28 +62,29 @@ const rule: Rule.RuleModule = {
           reportVariFunctionNoEventTag(context, attrKey, attrVal, node, callFunctionNodes, variFunctionNode)
         },
       },
-      {
+      compositingVisitors(
         // vue option下定义函数
-        ...defineVueOptionFunction(context, (node) => {
+        defineVueOptionFunctionVisitor(context, (node) => {
           const called = variFunction.get(node.name)
           called
             ? called.push(node)
             : variFunction.set(node.name, [node])
         }),
-        // // 本模板执行函数 this.xxx() xxx()
-        ["CallExpression>Identifier,"+
-        'MemberExpression[object.type="ThisExpression"][property.type="Identifier"]>Identifier'](
-          node: estree.Identifier ) {
-          const called = callFunction.get(node.name)
-          called
-            ? called.push(node)
-            : callFunction.set(node.name, [node])
-        },
-      } as Rule.RuleListener
+        {
+          // 本模板执行函数 this.xxx() xxx()
+          ["CallExpression>Identifier,"+
+           'MemberExpression[object.type="ThisExpression"][property.type="Identifier"]>Identifier'](
+            node: estree.Identifier ) {
+            const called = callFunction.get(node.name)
+            called
+              ? called.push(node)
+              : callFunction.set(node.name, [node])
+          },
+        }
+      )
     )
   }
 }
-
 
 function reportExecEventFunction(
   context: Rule.RuleContext,

@@ -94,3 +94,27 @@ export function isVariableDeclaration(node: estree.Node | undefined): node is es
 export function isVariableDeclarator(node: estree.Node | undefined): node is estree.VariableDeclarator {
   return node !== undefined && node.type === "VariableDeclarator"
 }
+
+export function isProperty(node: estree.Node | undefined): node is estree.Property {
+  return node !== undefined && node.type === "Property"
+}
+
+export function isMethodDefinition(node: estree.Node | undefined): node is estree.MethodDefinition {
+  return node !== undefined && node.type === "MethodDefinition"
+}
+
+export function isTemplateLiteral(node: estree.Node | undefined): node is estree.TemplateLiteral {
+  return node !== undefined && node.type === "TemplateLiteral"
+}
+
+export function isNewExpression(node: estree.Node | undefined): node is estree.NewExpression {
+  return node !== undefined && node.type === "NewExpression"
+}
+
+export function isExportDefaultDeclaration(node: estree.Node | undefined): node is estree.ExportDefaultDeclaration {
+  return node !== undefined && node.type === "ExportDefaultDeclaration"
+}
+
+export function isHasParent(node: estree.Node | undefined): node is estree.Node & { parent: estree.Node } {
+  return (node as any).parent !== undefined
+}

@@ -2,7 +2,7 @@
   <div>
     <input
       @enter="enterInputName"
-      @update="updateAaaaAaaaUL"
+      @update="updateAaaAaaaAaaaUL"
       @a-b-c="adasd"
     >
   </div>
@@ -10,14 +10,14 @@
 <script lang="ts">
 export default {
   methods: {
-    updateAaaaAaaaUL: (): void => {
+    updateAaaAaaaAaaaUL: (): void => {
       //
     },
     b: (): void => {
       //
     },
     c(): void {
-      this.updateAaaaAaaaUL()
+      this.updateAaaAaaaAaaaUL()
     },
     adasd(): void {
       //
