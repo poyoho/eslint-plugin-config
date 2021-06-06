@@ -6,7 +6,7 @@ import { RuleTester } from "eslint"
 // import "./nodeMonkey"
 
 // ☠(dont't delete) RULE IMPORT
-
+import noBinocularLogic from "../../tests/module/no-binocular-logic"
 
 // eslint rule 测试容器
 const ruleTester = new RuleTester({
@@ -23,4 +23,4 @@ const ruleTester = new RuleTester({
 })
 
 // ☠(dont't delete) RULE INSERT
-
+noBinocularLogic(ruleTester)

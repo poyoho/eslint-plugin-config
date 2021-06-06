@@ -5,6 +5,7 @@ export = {
     "vue/template-function-naming": require("./rules/vue/template-function-naming"),
     "vue/teamplate-export-order": require("./rules/vue/teamplate-export-order"),
     // ☠(dont't delete) JS RULE
+    "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic")
   },
   configs: {
