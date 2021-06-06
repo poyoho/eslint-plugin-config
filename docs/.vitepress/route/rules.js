@@ -7,10 +7,6 @@ module.exports = [
         text: "no-binocular-logic",
         link: "/rules/no-binocular-logic"
       },
-      {
-        text: "no-binocular-logic",
-        link: "/rules/no-binocular-logic"
-      },
     ]
   },
   {
