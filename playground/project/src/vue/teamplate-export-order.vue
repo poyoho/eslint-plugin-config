@@ -43,10 +43,36 @@ export default defineComponent({
     return {
     }
   },
+  computed: {
+    aaa: {
+      get() {
+        return "3"
+      },
+      set() {
+        this.a = 3
+      }
+    },
+    bbb: {
+      get() {
+        return "1"
+      },
+      set() {
+        this.a = 1
+      }
+    },
+    ddd: {
+      get() {
+        return "2"
+      },
+      set() {
+        this.a = 2
+      }
+    },
+  },
   methods: {
     methods() {
       //
     }
-  }
+  },
 })
 </script>
