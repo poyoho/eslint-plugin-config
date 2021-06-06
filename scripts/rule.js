@@ -27,10 +27,10 @@ const DOC =
 \`\`\``
 // 文档路由
 const DOC_ROUTE =
-`{
-  text: "$NAME",
-  link: "/rules/$NAME"
-},`
+`      {
+        text: "$NAME",
+        link: "/rules/$NAME"
+      },`
 // playgrond 引入
 const PLAYMAIN_IMPORT = `import $HUMP from "../../tests/module/$NAME"`
 // playground 插入
@@ -39,7 +39,7 @@ const PLAYMAIN_INSERT = `$HUMP(ruleTester)`
 const RULE_MODULE =
 `
 import { RuleTester } from "eslint"
-import rule from "lib/rules/$TYPE/$NAME"
+import rule from "../../lib/rules/$TYPE/$NAME"
 
 export default (ruleTester: RuleTester) =>
   ruleTester.run("$NAME", rule, {
@@ -85,6 +85,8 @@ const rule: Rule.RuleModule = {
 
 export = rule
 `
+// 导出新规则
+const RULE_EXPORT = `    "$TYPE/$NAME": require("./rules/$TYPE/$NAME"),`
 
 const fs = require("fs")
 const path = require("path")
@@ -116,7 +118,7 @@ async function input() {
     type: "select",
     name: "$TYPE",
     message: "规则类型",
-    choices: ["vue", "js", "ts"]
+    choices: ["vue", "js"]
   })).$TYPE
 
   let $NAME = (await prompt({
@@ -179,10 +181,11 @@ function genPlayMain(variables) {
   const playmainImport = replaceModule(PLAYMAIN_IMPORT, variables)
   const playmainInsert = replaceModule(PLAYMAIN_INSERT, variables)
   // playground rules
-  const playgroundRuleScriptPath = path.join(__dirname, "..", "playground/rules/vue.ts")
+  const playgroundRuleScriptPath = path.join(__dirname, "..", `playground/rules/${variables.$TYPE}.ts`)
   const script = fs.readFileSync(playgroundRuleScriptPath, { encoding: "utf-8" })
-    .replace("// ☠(dont't delete) RULE IMPORT", "// ☠(dont't delete) RULE IMPORT\n"+playmainImport)
-    .replace("// ☠(dont't delete) RULE INSERT", "// ☠(dont't delete) RULE INSERT\n"+playmainInsert)
+    .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainImport}\n// ${s1}`))
+    .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainInsert}\n// ${s1}`))
+
   fs.writeFileSync(
     playgroundRuleScriptPath,
     script,
@@ -215,10 +218,23 @@ function genRuleTest(variables) {
 function genRule(variables) {
   console.log(chalk.blue("gen default rule"))
   const ruleDefault = replaceModule(RULE_DEFAULT, variables)
+  const ruleExport = replaceModule(RULE_EXPORT, variables)
   // defalut rule
   fs.writeFileSync(
     path.join(__dirname, "..", `lib/rules/${variables.$TYPE}/`, variables.$NAME+".ts"),
     ruleDefault,
+    { encoding: "utf-8" }
+  )
+
+  // insert rule expot
+  const insertRuleExportPath = path.join(__dirname, "..", "lib/index.ts")
+  let ruleExportContent = fs.readFileSync(insertRuleExportPath, { encoding: "utf-8" })
+  ruleExportContent = variables.$TYPE === "vue"
+    ? ruleExportContent.replace("// ☠(dont't delete) VUE RULE", "// ☠(dont't delete) VUE RULE+\n"+ruleExport)
+    : ruleExportContent.replace("// ☠(dont't delete) JS RULE", "// ☠(dont't delete) JS RULE\n"+ruleExport)
+  fs.writeFileSync(
+    insertRuleExportPath,
+    ruleExportContent,
     { encoding: "utf-8" }
   )
 }

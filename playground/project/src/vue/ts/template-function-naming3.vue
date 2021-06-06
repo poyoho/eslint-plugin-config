@@ -4,8 +4,7 @@
       @enter="enterInputName"
       @aaa="aaa"
       @a-bb-cc="asdasd"
-      @update="AaaaAsadasd"
-      @a-b-c="adasd"
+      @update="updateAaaAsadasd"
     >
   </div>
 </template>
@@ -28,7 +27,7 @@ export default defineComponent({
       adasd: () => {
         //
       },
-      AaaaAsadasd: gg,
+      updateAaaAsadasd: gg,
     }
   },
   methods: {
