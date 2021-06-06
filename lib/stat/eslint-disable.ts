@@ -1,5 +1,4 @@
 import { Rule } from "eslint"
-import * as estree from "estree"
 
 const rule: Rule.RuleModule = {
   meta: {
