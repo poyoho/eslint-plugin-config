@@ -11,6 +11,7 @@ const rule: Rule.RuleModule = {
       description: "模板导出资源顺序",
       url: "https://poyoho.github.io/eslint-plugin-config/rules/teamplate-export-order.html"
     },
+    fixable: "code",
     messages: {
       "NoDictionaryOrder": "导出不是字典序"
     }
@@ -28,7 +29,7 @@ const rule: Rule.RuleModule = {
             if (isIdentifier(property.key)) {
               sortKey = property.key.name
             } else if (isLiteral(property.key)) {
-              sortKey = property.key.value!.toString()
+              sortKey = property.key.raw!.toString()
             } else {
               sortKey = sourceCode.getText(property.key)
             }
@@ -39,10 +40,15 @@ const rule: Rule.RuleModule = {
           sortNodeMap.set(sortKey, property)
           nowSort.push(sortKey)
         })
-        const sortKeys = Array.from(sortNodeMap.keys()).sort()
-        const sortKeyStringify = JSON.stringify(sortKeys)
-        if (JSON.stringify(nowSort) !== sortKeyStringify) { // 不是字典序
-          reportNoDictionaryOrder(context, node, sortKeys, sortNodeMap)
+        const sortedKeys = Array.from(sortNodeMap.keys()).sort()
+        const sortedKeyStringify = JSON.stringify(sortedKeys)
+        if (JSON.stringify(nowSort) !== sortedKeyStringify) { // 不是字典序
+          console.log(sortedKeys)
+          reportNoDictionaryOrder(
+            context,
+            node,
+            sortedKeys.map(key => sourceCode.getText(sortNodeMap.get(key)!))
+          )
         }
       }),
     )
@@ -52,14 +58,13 @@ const rule: Rule.RuleModule = {
 function reportNoDictionaryOrder(
   context: Rule.RuleContext,
   node: estree.ObjectExpression,
-  sortKeys: string[],
-  sortNodeMap: Map<string, estree.Property | estree.SpreadElement>,
+  sortedCode: string[]
 ) {
   context.report({
     messageId: "NoDictionaryOrder",
     loc: node.loc!,
     fix: (fixer) => {
-      return null
+      return node.properties.map((property, i) => fixer.replaceText(property, sortedCode[i]))
     }
   })
 }

@@ -5,13 +5,16 @@ import rule from "../../lib/rules/vue/teamplate-export-order"
 export default (ruleTester: RuleTester) =>
   ruleTester.run("teamplate-export-order", rule, {
     valid: [
+
+    ],
+
+    invalid: [
       {
         filename: "test.vue",
         code: `
         <script>
         export default defineComponent({
           setup(props) {
-            const b = "hello world"
             const a = reactive({
               bb: () => {
                   return {a,b,c}
@@ -27,11 +30,6 @@ export default (ruleTester: RuleTester) =>
                   a,b,c
                 }
             }
-            var arr = [a, b, ...{A,B,C}];
-            var gg = {a,b, ...a};
-            if (a)
-            b = 1
-
             return {
               ...b,
               [aaa]: reactive(aaa),
@@ -48,21 +46,48 @@ export default (ruleTester: RuleTester) =>
               cc,
             }
           },
-          data: () => {
-            return {
-            }
-          },
-          methods: {
-            aaa() {
-
-            }
-          }
         })
         </script>
-        `
+        `,
+        output: `
+        <script>
+        export default defineComponent({
+          setup(props) {
+            const a = reactive({
+              bb: () => {
+                  return {a,b,c}
+                }
+            })
+            function bb() {
+              return {
+                a,b,c
+                }
+            }
+            const cc = () => {
+              return {
+                  a,b,c
+                }
+            }
+            return {
+              "aaa": 1,
+              ...a,
+              ...b,
+              ...c,
+              99: 123,
+              a,
+              [aaa]: reactive(aaa),
+              [asd.asd]: 123,
+              bb,
+              cc,
+              dd: bb,
+              ee: cc,
+              props,
+            }
+          },
+        })
+        </script>
+        `,
+        errors: 1
       }
-    ],
-
-    invalid: [
     ]
   })

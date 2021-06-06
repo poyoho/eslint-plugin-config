@@ -3,7 +3,7 @@
     "*.{ts,vue,tsx,jsx,js}": "eslint --fix"
   },
   "devDependencies": {
-    "@poyoho/eslint-plugin-config": "../../",
+    "@poyoho/eslint-plugin-config": "link:../../dist/",
     "eslint-plugin-vue": "^7.10.0"
   },
   "engines": {
