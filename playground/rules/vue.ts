@@ -1,3 +1,7 @@
+/**
+ * ❌❌❌❌
+ * 在下次执行yarn gen:rule之前一定要还原修改
+ */
 import { RuleTester } from "eslint"
 // import "./nodeMonkey"
 

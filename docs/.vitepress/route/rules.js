@@ -13,10 +13,10 @@ module.exports = [
     text: "vue",
     children: [
       // ☠(dont't delete) VUE INSERT
-{
-  text: "teamplate-export-order",
-  link: "/rules/teamplate-export-order"
-},
+      {
+        text: "teamplate-export-order",
+        link: "/rules/teamplate-export-order"
+      },
       {
         text: "no-route-query",
         link: "/rules/no-route-query"
