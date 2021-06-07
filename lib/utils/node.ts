@@ -118,3 +118,15 @@ export function isExportDefaultDeclaration(node: estree.Node | undefined): node 
 export function isHasParent(node: estree.Node | undefined): node is estree.Node & { parent: estree.Node } {
   return (node as any).parent !== undefined
 }
+
+export function isForInStatement(node: estree.Node | undefined): node is estree.ForInStatement {
+  return node !== undefined && node.type === "ForInStatement"
+}
+
+export function isForOfStatement(node: estree.Node | undefined): node is estree.ForOfStatement {
+  return node !== undefined && node.type === "ForOfStatement"
+}
+
+export function isForStatement(node: estree.Node | undefined): node is estree.ForStatement {
+  return node !== undefined && node.type === "ForStatement"
+}
