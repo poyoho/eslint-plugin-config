@@ -13,6 +13,9 @@ export default (ruleTester: RuleTester) =>
         }
         `
       },
+    ],
+
+    invalid: [
       {
         filename: "test.vue",
         code: `
@@ -23,21 +26,7 @@ export default (ruleTester: RuleTester) =>
         }
         </script>
         `,
+        errors: 1
       },
-    ],
-
-    invalid: [
-      // {
-      //   filename: "test.vue",
-      //   code: `
-      //   <>
-      //   import mixin from "mixin"
-      //   export default {
-      //     mixin: [mixin]
-      //   }
-      //   </>
-      //   `,
-      //   errors: 1
-      // },
     ]
   })
