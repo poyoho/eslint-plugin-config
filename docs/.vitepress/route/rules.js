@@ -4,6 +4,10 @@ module.exports = [
     children: [
       // ☠(dont't delete) JS INSERT
       {
+        text: "ensure-scope-block",
+        link: "/rules/ensure-scope-block"
+      },
+      {
         text: "no-binocular-logic",
         link: "/rules/no-binocular-logic"
       },

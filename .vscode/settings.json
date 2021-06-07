@@ -3,6 +3,7 @@
         "rule",
         "doc",
         "playground",
-        "stat"
+        "stat",
+        "test"
     ]
 }
