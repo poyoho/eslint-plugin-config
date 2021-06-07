@@ -1,7 +1,7 @@
 import * as estree from "estree"
 import * as esnode from "./node"
 import * as tsnode from "./ts-node"
-import { Rule } from "eslint"
+import { Rule, SourceCode } from "eslint"
 
 type HasPropertyNode = estree.Property | estree.AssignmentProperty | estree.MethodDefinition | estree.MemberExpression
 
@@ -108,9 +108,8 @@ export function traverseMemberObject(node: estree.MemberExpression): estree.Node
 }
 
 // 获取object.xxx的字面值
-export function getObjectExpressionKey(context: Rule.RuleContext, property: estree.Property | estree.SpreadElement) {
+export function getObjectExpressionKey(sourceCode: SourceCode, property: estree.Property | estree.SpreadElement) {
   let sortKey: string
-  const sourceCode = context.getSourceCode()
   if (esnode.isProperty(property)) {
     if (esnode.isIdentifier(property.key)) {
       sortKey = property.key.name

@@ -1,6 +1,6 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
-import { isIdentifier, isLiteral, isProperty } from "../../utils/node"
+import { getObjectExpressionKey } from "../../utils/getter"
 import { defineVueExposeVisitor } from "../../visitors"
 
 const rule: Rule.RuleModule = {
@@ -24,19 +24,7 @@ const rule: Rule.RuleModule = {
       const nowSort: string[] = []
       for(const idx in node.properties) {
         const property = node.properties[idx]
-        let sortKey: string
-        if (isProperty(property)) {
-          if (isIdentifier(property.key)) {
-            sortKey = property.key.name
-          } else if (isLiteral(property.key)) {
-            sortKey = property.key.raw!.toString()
-          } else {
-            sortKey = sourceCode.getText(property.key)
-          }
-        } else {
-          // ...[a, b, c]
-          sortKey = sourceCode.getText(property)
-        }
+        const sortKey = getObjectExpressionKey(sourceCode, property)
         if (sortNodeMap.get(sortKey)) { // 具有两个相同的key直接退出 代码正在修改
           return
         }
