@@ -249,7 +249,7 @@ function genRule(variables) {
   updateFile(
     "lib/index.ts",
     (content) => variables.$TYPE === "vue"
-      ? content.replace("// ☠(dont't delete) VUE RULE", "// ☠(dont't delete) VUE RULE+\n"+ruleExport)
+      ? content.replace("// ☠(dont't delete) VUE RULE", "// ☠(dont't delete) VUE RULE\n"+ruleExport)
       : content.replace("// ☠(dont't delete) JS RULE", "// ☠(dont't delete) JS RULE\n"+ruleExport)
   )
 }
