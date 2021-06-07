@@ -1,8 +1,10 @@
 import { Linter } from "eslint"
 
 const config: Linter.Config = {
+  parser: require.resolve("vue-eslint-parser"),
   parserOptions: {
-    parser: require.resolve("@typescript-eslint/parser"),
+    ecmaVersion: 2020,
+    sourceType: "module",
     extraFileExtensions: [".vue"],
     ecmaFeatures: { jsx: true }
   },

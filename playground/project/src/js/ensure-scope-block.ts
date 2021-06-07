@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @poyoho/config/js/ensure-scope-block */
 const b = Math.random() > 0.5
 const arr = [{name: "1"}, {name: "3"}, {name: "2"}]

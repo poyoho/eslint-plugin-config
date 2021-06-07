@@ -23,10 +23,10 @@ export default defineComponent({
     gg()
     return {
       aaa,
-      bbb,
       adasd: () => {
         //
       },
+      bbb,
       updateAaaAsadasd: gg,
     }
   },

@@ -8,22 +8,20 @@
   </div>
 </template>
 <script lang="ts">
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export default {
-  // eslint-disable-next-line @poyoho/config/vue/teamplate-export-order, @typescript-eslint/no-empty-function
-  // eslint-disable-next-line @poyoho/config/vue/teamplate-export-order, @typescript-eslint/no-empty-function
-  // eslint-disable-next-line @poyoho/config/vue/teamplate-export-order, @typescript-eslint/no-empty-function
-  // eslint-disable-next-line @poyoho/config/vue/teamplate-export-order, @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @poyoho/config/vue/template-function-naming, @typescript-eslint/no-empty-function
   methods: {
-    // eslint-disable-next-line @poyoho/config/vue/template-function-naming, @typescript-eslint/no-empty-function
-    updateAaaAaaaAaaaUL: (): void => {
-    },
-    b: (): void => {
+    adasd() {
       //
     },
-    c(): void {
+    b: () => {
+      //
+    },
+    c() {
       this.updateAaaAaaaAaaaUL()
     },
-    adasd(): void {
+    updateAaaAaaaAaaaUL: () => {
       //
     }
   }

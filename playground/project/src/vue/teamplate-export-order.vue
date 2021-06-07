@@ -1,27 +1,30 @@
 <script>
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @poyoho/config/vue/teamplate-export-order */
 export default defineComponent({
   setup(props) {
     const b = "hello world"
     const a = reactive({
       bb: () => {
-          return {a,b,c}
-        }
+        return {a,b,c}
+      }
     })
     function bb() {
       return {
         a,b,c
-        }
+      }
     }
     const cc = () => {
       return {
-          a,b,c
-        }
+        a,b,c
+      }
     }
-    var arr = [a, b, ...{A,B,C}];
-    var gg = {a,b, ...a};
+    var arr = [a, b, ...{A,B,C}]
+    var gg = {a,b, ...a}
     if (a)
-    b = 1
+    {
+      b = 1
+    }
 
     return {
       ...b,

@@ -1,16 +1,16 @@
 <template>
-  <div class="test" />
+  <div
+    class="test"
+    @aaa="aaa"
+  />
 </template>
 
 <script lang="ts">
-function aa(this: any, a: number) {
-  console.log(a)
-  console.log(this.$route.query)
-}
 export default {
   methods: {
     aaa() {
       //
+      console.log(this.$route.query)
     }
   }
 }

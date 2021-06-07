@@ -15,7 +15,6 @@ const rule: Rule.RuleModule = {
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    console.log("no-binocular-logic")
     return {
       "ExpressionStatement>ConditionalExpression"(node: estree.ConditionalExpression) {
         context.report({

@@ -2,7 +2,9 @@ export = {
   parser: require.resolve("vue-eslint-parser"),
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: "module"
+    sourceType: "module",
+    extraFileExtensions: [".vue"],
+    ecmaFeatures: { jsx: true }
   },
   env: {
     browser: true,
@@ -39,5 +41,7 @@ export = {
         code: 120,
       },
     ],
-  }
+  },
+  // Require === and !==
+  // eqeqeq: ["error", "always"]
 }
