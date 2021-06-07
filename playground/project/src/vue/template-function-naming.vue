@@ -1,3 +1,4 @@
+<!-- eslint-disable @poyoho/config/vue/template-function-naming -->
 <template>
   <div>
     <input
@@ -12,6 +13,7 @@
 export default {
   // eslint-disable-next-line @poyoho/config/vue/template-function-naming, @typescript-eslint/no-empty-function
   methods: {
+    // eslint-disable-next-line @poyoho/config/vue/template-function-naming
     adasd() {
       //
     },
@@ -19,8 +21,10 @@ export default {
       //
     },
     c() {
+      // eslint-disable-next-line @poyoho/config/vue/template-function-naming
       this.updateAaaAaaaAaaaUL()
     },
+    // eslint-disable-next-line @poyoho/config/vue/template-function-naming
     updateAaaAaaaAaaaUL: () => {
       //
     }
