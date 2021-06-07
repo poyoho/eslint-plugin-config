@@ -1,6 +1,6 @@
 {
   "name": "@poyoho/eslint-plugin-config",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "eslint plugin for myself",
   "keywords": [
     "eslint",
@@ -38,10 +38,10 @@
     "vue-eslint-parser": "^7.6.0"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.9.1",
     "eslint": "^7.12.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-sonarjs": "^0.8.0-125",
-    "@typescript-eslint/eslint-plugin": "^4.9.1"
+    "eslint-plugin-sonarjs": "^0.8.0-125"
   },
   "devDependencies": {
     "@types/eslint": "^7.2.6",
