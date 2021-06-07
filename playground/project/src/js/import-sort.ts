@@ -1,3 +1,4 @@
-import { b, c,e,f,h } from "./export"
+import { b } from './export'
+import { a as g,c,h } from './export2'
 
-console.log(b, c, e, f, h)
+console.log(g,b,c,h)

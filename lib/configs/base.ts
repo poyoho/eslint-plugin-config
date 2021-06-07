@@ -7,19 +7,17 @@ export = {
     "eslint:recommended",
   ],
   plugins: [
-    "@poyoho/config"
+    "@poyoho/config",
+    "simple-import-sort",
   ],
   rules: {
     // Require === and !==
     "eqeqeq": ["error", "always", {"null": "ignore"}],
-    // 排序
-    "sort-imports": ["error", {
-      "ignoreCase": false,
-      "ignoreDeclarationSort": false,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-    }],
-    // 格式化配置
+    // 排序 eslint(sort-imports)不好用
+    // https://github.com/lydell/eslint-plugin-simple-import-sort#example
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    // 分号
     semi: ["error", "never"],
     // @fixable 一个缩进必须用四个空格替代
     indent: [
