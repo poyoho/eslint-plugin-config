@@ -19,5 +19,6 @@ export = {
     "@poyoho/config/vue/no-route-query": "warn",
     "@poyoho/config/vue/template-function-naming": "warn",
     "@poyoho/config/vue/teamplate-export-order": "warn",
+    "@poyoho/config/vue/no-mixin": "warn",
   },
 }

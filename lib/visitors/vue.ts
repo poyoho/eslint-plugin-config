@@ -8,7 +8,7 @@ import { VueObjectType, getVueObjectType, isVueFile } from "../utils/vue-node"
 const optionMethodsProperty = 'ExportDefaultDeclaration Property[key.name="methods"]'
 const optionWatchProperty = 'ExportDefaultDeclaration Property[key.name="watch"]'
 const optionComputedProperty = 'ExportDefaultDeclaration Property[key.name="computed"]'
-const optionMixinProperty = 'ExportDefaultDeclaration Property[key.name="mixin"]'
+const optionMixinProperty = 'ExportDefaultDeclaration Property[key.name="mixins"]'
 const optionDataBlock = 'ExportDefaultDeclaration Property[key.name="data"]>*>BlockStatement'
 const optionSetupBlock = 'ExportDefaultDeclaration Property[key.name="setup"]>*>BlockStatement'
 

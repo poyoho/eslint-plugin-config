@@ -9,7 +9,7 @@ export default (ruleTester: RuleTester) =>
         code: `
         import mixin from "mixin"
         export default {
-          mixin: [mixin]
+          mixins: [mixin]
         }
         `
       },
@@ -22,7 +22,7 @@ export default (ruleTester: RuleTester) =>
         <script>
         import mixin from "mixin"
         export default {
-          mixin: [mixin]
+          mixins: [mixin]
         }
         </script>
         `,

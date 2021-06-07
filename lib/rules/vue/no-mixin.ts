@@ -2,49 +2,8 @@ import { Rule } from "eslint"
 import { defineVueMixinVisitor } from "../../visitors"
 
 const MIXIN_MSG =
-`
-1. 改用组件引入\`mixin\`内容
-\`\`\`html
-<teamplate>
-  <div class="test">
-    <component />
-  </div>
-</teamplate>
-<script>
-import component from "component"
-export default {
-  components: {
-    component
-  }
-}
-</script>
-\`\`\`
-
-2. 将mixin内容改成无渲染组件
-
-\`\`\`js
-export default {
-  name: "component",
-  data() {
-    return {}
-  },
-  props: [],
-  methods: {},
-  computed: {},
-  watch: {},
-  // ⭐ 注入灵魂
-  render() {
-    // 导出值 <div slot-scope="{ tags }">获取值
-    return this.$scopedSlots.default({
-        tags: this.value
-    })
-
-    // 不导出值
-    return null
-  }
-}
-\`\`\`
-`
+`1. 改用组件引入\`mixin\`内容
+2. 将mixin内容改成无渲染组件`
 
 const rule: Rule.RuleModule = {
   meta: {
