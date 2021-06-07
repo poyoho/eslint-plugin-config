@@ -35,11 +35,12 @@ export default (ruleTester: RuleTester) =>
     ],
 
     invalid: [
-      {
-        filename: "test.vue",
-        code: "<script>if (b) console.log('1')</script>",
-        errors: 1
-      },
+      // {
+      //   filename: "test.vue",
+      //   code: "<script>if (b) console.log('1')</script>",
+      //   errors: 1,
+      //   output: "<script>if (b) {\nconsole.log('1')\n}</script>"
+      // },
       {
         code: `
         if (b)
@@ -47,14 +48,16 @@ export default (ruleTester: RuleTester) =>
         else
           console.log('当前值为 false')
         `,
-        errors: 1
+        errors: 2,
+        output: ""
       },
-      {
-        code: `
-        for (const item of arr)
-          if (item.name === '张三') isFind = true
-        `,
-        errors: 2
-      }
+      // {
+      //   code: `
+      //   for (const item of arr)
+      //     if (item.name === '张三') isFind = true
+      //   `,
+      //   errors: 2,
+      //   output: ""
+      // }
     ]
   })
