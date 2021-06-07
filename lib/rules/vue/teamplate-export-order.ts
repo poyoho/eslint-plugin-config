@@ -43,7 +43,8 @@ const rule: Rule.RuleModule = {
         sortNodeMap.set(sortKey, property)
         nowSort.push(sortKey)
       }
-      const sortedKeys = Array.from(sortNodeMap.keys()).sort() // TODO 带符号权重的字典序
+      // TODO 带符号权重的字典序
+      const sortedKeys = Array.from(sortNodeMap.keys()).sort()
       const sortedKeyStringify = JSON.stringify(sortedKeys)
       if (JSON.stringify(nowSort) !== sortedKeyStringify) { // 不是字典序
         console.log(sortedKeys)

@@ -33,7 +33,6 @@ export default (ruleTester: RuleTester) =>
               <input @bbb="bbbInputName">
           </div>
           </template>
-
           <script>
           export default {
             methods: {
@@ -42,6 +41,8 @@ export default (ruleTester: RuleTester) =>
           }
           </script>`
       },
+    ],
+    invalid: [
       {
         filename: "test.vue",
         code: `
@@ -57,10 +58,9 @@ export default (ruleTester: RuleTester) =>
               bbbInputName () {},
             }
           }
-          </script>`
+          </script>`,
+        errors: 2
       },
-    ],
-    invalid: [
       {
         filename: "test.vue",
         code: `
@@ -74,22 +74,6 @@ export default (ruleTester: RuleTester) =>
         export default {
           methods: {
             aaaInputName () {}, // ❌
-            bbbUserName () {}, // ❌
-          }
-        }
-        </script>
-        `,
-        output: `
-        <template>
-        <div>
-            <input @enter="enterAaaInputName" @update-user-name="bbbUserName">
-        </div>
-        </template>
-
-        <script>
-        export default {
-          methods: {
-            enterAaaInputName () {}, // ❌
             bbbUserName () {}, // ❌
           }
         }

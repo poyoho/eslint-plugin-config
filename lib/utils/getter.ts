@@ -106,3 +106,22 @@ export function traverseMemberObject(node: estree.MemberExpression): estree.Node
   }
   return node.object
 }
+
+// 获取object.xxx的字面值
+export function getObjectExpressionKey(context: Rule.RuleContext, property: estree.Property | estree.SpreadElement) {
+  let sortKey: string
+  const sourceCode = context.getSourceCode()
+  if (esnode.isProperty(property)) {
+    if (esnode.isIdentifier(property.key)) {
+      sortKey = property.key.name
+    } else if (esnode.isLiteral(property.key)) {
+      sortKey = property.key.raw!.toString()
+    } else {
+      sortKey = sourceCode.getText(property.key)
+    }
+  } else {
+    // ...[a, b, c]
+    sortKey = sourceCode.getText(property)
+  }
+  return sortKey
+}

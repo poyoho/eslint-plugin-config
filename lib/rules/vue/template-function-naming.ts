@@ -85,6 +85,7 @@ const rule: Rule.RuleModule = {
     )
   }
 }
+// !!! 改名修复危险 容易破坏程序预期输出(而且还做不出来)
 
 function reportExecEventFunction(
   context: Rule.RuleContext,
@@ -92,11 +93,10 @@ function reportExecEventFunction(
   methodsObjectExpression: estree.ObjectExpression,
   callFunctionNodes?: estree.Identifier[],
   variableNodes?: estree.Identifier[]) {
+  console.log("reportExecEventFunction")
   if(!callFunctionNodes) {
     return
   }
-  // 1. this.aaa() => this.doAaa
-  // 2. aaa() => doAaa()
   // 报告 初始化者
   variableNodes &&
   variableNodes.forEach(variableNode => {
@@ -127,20 +127,12 @@ function reportVariFunctionNoEventTag(
   if (isEventTag(eventName) || ( eventName === attrKey )) {
     return
   }
-  const newAttrVal = attrKey + attrVal.replace(attrVal[0], attrVal[0].toUpperCase())
-  const fix = (node: estree.Node) => (fixer: Rule.RuleFixer) => {
-    if (/[-_A-Z]/.test(attrKey)) { // 事件名太复杂就不修复了
-      return null
-    }
-    return fixer.replaceText(node, newAttrVal)
-  }
   // 初始化函数
   variableNodes &&
   variableNodes.forEach(variNode => {
     context.report({
       messageId: "variFunctionNoEventTag",
       loc: variNode.loc!,
-      fix: fix(variNode)
     })
   })
 
@@ -150,7 +142,6 @@ function reportVariFunctionNoEventTag(
     context.report({
       messageId: "variFunctionNoEventTag",
       loc: callNode.loc!,
-      fix: fix(callNode)
     })
   })
 
@@ -159,7 +150,6 @@ function reportVariFunctionNoEventTag(
   context.report({
     messageId: "variFunctionNoEventTag",
     loc: teamplateNode.loc!,
-    fix: fix(teamplateNode as estree.Node)
   })
 }
 
