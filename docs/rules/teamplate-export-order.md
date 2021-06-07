@@ -2,7 +2,6 @@
 
 按照字典序排序导出资源。
 
-
 ## 事例
 
 此规则的**错误**代码示例：
@@ -70,15 +69,13 @@ export default {
     function enterInputEmail() {}
 
     return {
+      clickHello,
+      clickWorld,
+      enterInputName,
+      enterInputEmail,
       varA,
       varB,
       varC,
-
-      clickHello,
-      clickWorld,
-
-      enterInputName,
-      enterInputEmail,
     }
   }
 }

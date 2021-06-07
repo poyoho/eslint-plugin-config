@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable @poyoho/config/vue/teamplate-export-order */
 export default defineComponent({
   setup(props) {
     const b = "hello world"
@@ -22,7 +23,6 @@ export default defineComponent({
     if (a)
     b = 1
 
-    // eslint-disable-next-line @poyoho/config/vue/teamplate-export-order
     return {
       ...b,
       [aaa]: reactive(aaa),
@@ -43,10 +43,36 @@ export default defineComponent({
     return {
     }
   },
+  computed: {
+    aaa: {
+      get() {
+        return "3"
+      },
+      set() {
+        this.a = 3
+      }
+    },
+    bbb: {
+      get() {
+        return "1"
+      },
+      set() {
+        this.a = 1
+      }
+    },
+    ddd: {
+      get() {
+        return "2"
+      },
+      set() {
+        this.a = 2
+      }
+    },
+  },
   methods: {
     methods() {
       //
     }
-  }
+  },
 })
 </script>

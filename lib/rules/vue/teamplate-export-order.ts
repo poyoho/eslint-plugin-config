@@ -22,7 +22,8 @@ const rule: Rule.RuleModule = {
     return defineVueExposeVisitor(context, (node) => {
       const sortNodeMap = new Map<string, estree.Property | estree.SpreadElement>()
       const nowSort: string[] = []
-      node.properties.forEach(property => {
+      for(const idx in node.properties) {
+        const property = node.properties[idx]
         let sortKey: string
         if (isProperty(property)) {
           if (isIdentifier(property.key)) {
@@ -36,9 +37,12 @@ const rule: Rule.RuleModule = {
           // ...[a, b, c]
           sortKey = sourceCode.getText(property)
         }
+        if (sortNodeMap.get(sortKey)) { // 具有两个相同的key直接退出 代码正在修改
+          return
+        }
         sortNodeMap.set(sortKey, property)
         nowSort.push(sortKey)
-      })
+      }
       const sortedKeys = Array.from(sortNodeMap.keys()).sort() // TODO 带符号权重的字典序
       const sortedKeyStringify = JSON.stringify(sortedKeys)
       if (JSON.stringify(nowSort) !== sortedKeyStringify) { // 不是字典序
