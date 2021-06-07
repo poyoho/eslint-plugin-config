@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+/* eslint-disable no-undef */
 export default defineComponent({
   setup() {
     function gg() {

@@ -1,4 +1,6 @@
 <script>
+/* eslint-disable no-const-assign */
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @poyoho/config/vue/teamplate-export-order */
 export default defineComponent({

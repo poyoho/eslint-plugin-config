@@ -10,8 +10,12 @@ export = {
     browser: true,
     es6: true
   },
-  plugins: ["@poyoho/config", "vue"],
+  plugins: [
+    "@poyoho/config",
+    "vue",
+  ],
   extends: [
+    "eslint:recommended",
     "plugin:vue/recommended" // vue推荐配置
   ],
   rules: {
@@ -22,7 +26,8 @@ export = {
 
     "@poyoho/config/js/no-binocular-logic": "warn",
     "@poyoho/config/js/ensure-scope-block": "warn",
-
+    // Require === and !==
+    "eqeqeq": ["error", "always", {"null": "ignore"}],
     // 格式化配置
     semi: ["error", "never"],
     // @fixable 一个缩进必须用四个空格替代
@@ -42,6 +47,4 @@ export = {
       },
     ],
   },
-  // Require === and !==
-  // eqeqeq: ["error", "always"]
 }
