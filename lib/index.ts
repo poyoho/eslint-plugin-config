@@ -5,6 +5,7 @@ export = {
     "vue/template-function-naming": require("./rules/vue/template-function-naming"),
     "vue/teamplate-export-order": require("./rules/vue/teamplate-export-order"),
     // ☠(dont't delete) JS RULE
+    "js/ensure-scope-block": require("./rules/js/ensure-scope-block"),
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
     // stat eslint扫描顺便做的统计
     "stat/eslint-disable": require("./stat/eslint-disable"),
