@@ -4,6 +4,7 @@
         "doc",
         "playground",
         "stat",
-        "test"
+        "test",
+        "config"
     ]
 }
