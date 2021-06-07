@@ -6,10 +6,13 @@ export default (ruleTester: RuleTester) =>
   ruleTester.run("ensure-scope-block", rule, {
     valid: [
       {
+        filename: "test.vue",
         code: `
+        <script>
         if (b) {
-          return
+          console.log("111")
         }
+        </script>
         `
       },
       {
@@ -34,7 +37,7 @@ export default (ruleTester: RuleTester) =>
     invalid: [
       {
         filename: "test.vue",
-        code: "<script>if (b) return</script>",
+        code: "<script>if (b) console.log('1')</script>",
         errors: 1
       },
       {
@@ -44,7 +47,7 @@ export default (ruleTester: RuleTester) =>
         else
           console.log('当前值为 false')
         `,
-        errors: 2
+        errors: 1
       },
       {
         code: `

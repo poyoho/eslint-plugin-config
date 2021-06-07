@@ -17,7 +17,10 @@ const config: Linter.Config = {
   rules: { // 自定义插件库推荐配置
     "@poyoho/config/vue/no-route-query": "warn",
     "@poyoho/config/vue/template-function-naming": "warn",
-    "@poyoho/config/vue/teamplate-export-order": "warn"
+    "@poyoho/config/vue/teamplate-export-order": "warn",
+
+    "@poyoho/config/js/no-binocular-logic": "warn",
+    "@poyoho/config/js/ensure-scope-block": "warn",
   }
 }
 

@@ -16,6 +16,7 @@ const config: Linter.Config = {
   ],
   rules: {
     "@poyoho/config/js/no-binocular-logic": "warn",
+    "@poyoho/config/js/ensure-scope-block": "warn",
   }
 }
 
