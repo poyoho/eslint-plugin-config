@@ -27,7 +27,7 @@ export default (ruleTester: RuleTester) =>
       {
         filename: "test.vue",
         code: `
-        <>
+        <script>
         export default defineComponent({
           setup(props) {
             const a = reactive({
@@ -62,10 +62,10 @@ export default (ruleTester: RuleTester) =>
             }
           },
         })
-        </>
+        </script>
         `,
         output: `
-        <>
+        <script>
         export default defineComponent({
           setup(props) {
             const a = reactive({
@@ -100,7 +100,7 @@ export default (ruleTester: RuleTester) =>
             }
           },
         })
-        </>
+        </script>
         `,
         errors: 1
       }

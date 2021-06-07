@@ -6,8 +6,6 @@ export = {
     "vue/teamplate-export-order": require("./rules/vue/teamplate-export-order"),
     // ☠(dont't delete) JS RULE
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
-    // statistics 在eslint扫描代码的时候 做一些统计
-    "stat/eslint-disable": require("./stat/eslint-disable")
   },
   configs: {
     js: require("./configs/recommended-js"),
