@@ -1,13 +1,14 @@
 import { Rule } from "eslint"
 import * as estree from "estree"
 import * as tsnode from "../utils/ts-node"
-import { isArrowFunctionExpression, isFunctionExpression, isIdentifier, isProperty } from "../utils/node"
+import { isArrowFunctionExpression, isFunctionExpression, isIdentifier } from "../utils/node"
 import { getScopeVariables } from "../utils/getter"
-import { VueObjectType, getVueObjectType } from "../utils/vue-node"
+import { VueObjectType, getVueObjectType, isVueFile } from "../utils/vue-node"
 
 const optionMethodsProperty = 'ExportDefaultDeclaration Property[key.name="methods"]'
 const optionWatchProperty = 'ExportDefaultDeclaration Property[key.name="watch"]'
 const optionComputedProperty = 'ExportDefaultDeclaration Property[key.name="computed"]'
+const optionMixinProperty = 'ExportDefaultDeclaration Property[key.name="mixins"]'
 const optionDataBlock = 'ExportDefaultDeclaration Property[key.name="data"]>*>BlockStatement'
 const optionSetupBlock = 'ExportDefaultDeclaration Property[key.name="setup"]>*>BlockStatement'
 
@@ -18,6 +19,9 @@ export function defineVueFnIdentifierVisitor(
 ): Rule.RuleListener {
   const cacheFnDef: Record<string, estree.Identifier> = {}
   let cacheVarDef: Record<string, estree.Identifier> = {}
+  if(!isVueFile(context.getFilename())) {
+    return {}
+  }
   return {
     // option.methods 定义函数 / 匿名函数 methods: { ⭐() {}, ⭐ => {} }
     [`${optionMethodsProperty} Property[value.type=/^(Arrow)?FunctionExpression$/] > Identifier`](
@@ -73,6 +77,9 @@ export function defineVueExposeVisitor(
   context: Rule.RuleContext,
   cb: (node: estree.ObjectExpression) => void
 ): Rule.RuleListener {
+  if(!isVueFile(context.getFilename())) {
+    return {}
+  }
   return {
     [`${optionSetupBlock}>ReturnStatement ObjectExpression`]( // setup() {return {⭐}}
       node: estree.ObjectExpression) {
@@ -95,6 +102,21 @@ export function defineVueExposeVisitor(
     [`${optionComputedProperty} ObjectExpression`]( // computed: {⭐}
       node: estree.ObjectExpression
     ){
+      cb(node)
+    }
+  }
+}
+
+// vue 暴露给模板的数据 ObjectExpression
+export function defineVueMixinVisitor(
+  context: Rule.RuleContext,
+  cb: (node: estree.Property) => void
+): Rule.RuleListener {
+  if(!isVueFile(context.getFilename())) {
+    return {}
+  }
+  return {
+    [optionMixinProperty] (node: estree.Property) {
       cb(node)
     }
   }
@@ -135,7 +157,6 @@ export function executeOnCallVueComponent(
   context: Rule.RuleContext,
   cb: (node: estree.CallExpression) => void): Rule.RuleListener {
   return {
-    /** @param {Identifier & { parent: MemberExpression & { parent: CallExpression } } } node */
     "CallExpression > MemberExpression > Identifier[name='component']": (
       node: estree.Identifier
     ) => {

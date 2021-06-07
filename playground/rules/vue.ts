@@ -5,10 +5,11 @@
 import { RuleTester } from "eslint"
 // import "./nodeMonkey"
 
-// ☠(dont't delete) RULE IMPORT
+import noMixin from "../../tests/module/no-mixin"
+// // ☠(dont't delete) RULE IMPORT
 // import teamplateExportOrder from "../../tests/module/teamplate-export-order"
 // import noRouteQuery from "../../tests/module/no-route-query"
-import teamplateFunctionNaming from "../../tests/module/template-function-naming"
+// import teamplateFunctionNaming from "../../tests/module/template-function-naming"
 
 // eslint rule 测试容器
 const ruleTester = new RuleTester({
@@ -24,7 +25,8 @@ const ruleTester = new RuleTester({
   },
 })
 
-// ☠(dont't delete) RULE INSERT
+noMixin(ruleTester)
+// // ☠(dont't delete) RULE INSERT
 // teamplateExportOrder(ruleTester)
 // noRouteQuery(ruleTester)
-teamplateFunctionNaming(ruleTester)
+// teamplateFunctionNaming(ruleTester)

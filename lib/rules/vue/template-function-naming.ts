@@ -93,7 +93,7 @@ function reportExecEventFunction(
   methodsObjectExpression: estree.ObjectExpression,
   callFunctionNodes?: estree.Identifier[],
   variableNodes?: estree.Identifier[]) {
-  console.log("reportExecEventFunction")
+  // console.log("reportExecEventFunction")
   if(!callFunctionNodes) {
     return
   }

@@ -35,7 +35,7 @@ const rule: Rule.RuleModule = {
       const sortedKeys = Array.from(sortNodeMap.keys()).sort()
       const sortedKeyStringify = JSON.stringify(sortedKeys)
       if (JSON.stringify(nowSort) !== sortedKeyStringify) { // 不是字典序
-        console.log(sortedKeys)
+        // console.log(sortedKeys)
         reportNoDictionaryOrder(
           context,
           node,

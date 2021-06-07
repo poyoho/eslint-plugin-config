@@ -18,6 +18,10 @@ module.exports = [
     children: [
       // ☠(dont't delete) VUE INSERT
       {
+        text: "no-mixin",
+        link: "/rules/no-mixin"
+      },
+      {
         text: "teamplate-export-order",
         link: "/rules/teamplate-export-order"
       },

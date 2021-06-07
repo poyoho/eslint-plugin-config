@@ -42,7 +42,7 @@ export function getVueObjectType(context: Rule.RuleContext, node: estree.ObjectE
   return null
 }
 
-function isVueFile(path: string) {
+export function isVueFile(path: string) {
   return path.endsWith(".vue") || path.endsWith(".jsx") || path.endsWith(".tsx")
 }
 

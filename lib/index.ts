@@ -1,6 +1,7 @@
 export = {
   rules: {
-    // ☠(dont't delete) VUE RULE
+    // ☠(dont't delete) VUE RULE+
+    "vue/no-mixin": require("./rules/vue/no-mixin"),
     "vue/no-route-query": require("./rules/vue/no-route-query"),
     "vue/template-function-naming": require("./rules/vue/template-function-naming"),
     "vue/teamplate-export-order": require("./rules/vue/teamplate-export-order"),
