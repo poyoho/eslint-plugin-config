@@ -2,11 +2,23 @@ import { Linter } from "eslint"
 
 const config: Linter.Config = {
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2020,
     sourceType: "module",
+    parser: require.resolve("@typescript-eslint/parser"),
   },
-  plugins: ["@poyoho/config"],
+  env: {
+    browser: true,
+    es6: true
+  },
+  plugins: [
+    "@poyoho/config",
+    "@typescript-eslint"
+  ],
+  extends: [
+    "plugin:@typescript-eslint/recommended" // ts默认配置
+  ],
   rules: {
+    "@poyoho/config/js/no-binocular-logic": "warn",
   }
 }
 
