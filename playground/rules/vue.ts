@@ -9,7 +9,7 @@ import noMixin from "../../tests/module/no-mixin"
 // // ☠(dont't delete) RULE IMPORT
 // import teamplateExportOrder from "../../tests/module/teamplate-export-order"
 // import noRouteQuery from "../../tests/module/no-route-query"
-import teamplateFunctionNaming from "../../tests/module/template-function-naming"
+// import teamplateFunctionNaming from "../../tests/module/template-function-naming"
 
 // eslint rule 测试容器
 const ruleTester = new RuleTester({
@@ -29,4 +29,4 @@ noMixin(ruleTester)
 // // ☠(dont't delete) RULE INSERT
 // teamplateExportOrder(ruleTester)
 // noRouteQuery(ruleTester)
-teamplateFunctionNaming(ruleTester)
+// teamplateFunctionNaming(ruleTester)

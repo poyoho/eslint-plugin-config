@@ -8,6 +8,7 @@ import { VueObjectType, getVueObjectType } from "../utils/vue-node"
 const optionMethodsProperty = 'ExportDefaultDeclaration Property[key.name="methods"]'
 const optionWatchProperty = 'ExportDefaultDeclaration Property[key.name="watch"]'
 const optionComputedProperty = 'ExportDefaultDeclaration Property[key.name="computed"]'
+const optionMixinProperty = 'ExportDefaultDeclaration Property[key.name="mixin"]'
 const optionDataBlock = 'ExportDefaultDeclaration Property[key.name="data"]>*>BlockStatement'
 const optionSetupBlock = 'ExportDefaultDeclaration Property[key.name="setup"]>*>BlockStatement'
 
@@ -95,6 +96,18 @@ export function defineVueExposeVisitor(
     [`${optionComputedProperty} ObjectExpression`]( // computed: {⭐}
       node: estree.ObjectExpression
     ){
+      cb(node)
+    }
+  }
+}
+
+// vue 暴露给模板的数据 ObjectExpression
+export function defineVueMixinVisitor(
+  context: Rule.RuleContext,
+  cb: (node: estree.Property) => void
+): Rule.RuleListener {
+  return {
+    [optionMixinProperty] (node: estree.Property) {
       cb(node)
     }
   }

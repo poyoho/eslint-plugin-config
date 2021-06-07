@@ -1,4 +1,5 @@
 import { Rule } from "eslint"
+import { defineVueMixinVisitor } from "../../visitors"
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -11,8 +12,9 @@ const rule: Rule.RuleModule = {
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    return {
-    }
+    return defineVueMixinVisitor(context, (node) => {
+      console.log(node)
+    })
   }
 }
 
