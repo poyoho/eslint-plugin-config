@@ -12,15 +12,16 @@ export default defineComponent({
         a,b,c
       }
     }
+    // eslint-disable-next-line sonarjs/no-identical-functions
     const cc = () => {
       return {
         a,b,c
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    var arr = [a, b, ...{A,B,C}]
+    let arr = [a, b, ...{A,B,C}]
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    var gg = {a,b, ...a}
+    let gg = {a,b, ...a}
     if (a)
     {
       // eslint-disable-next-line no-const-assign
