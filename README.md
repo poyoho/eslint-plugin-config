@@ -1,4 +1,4 @@
-# eslint-plugin-hhh
+# eslint-plugin-config
 
 eslint plugin for myself
 
@@ -16,10 +16,20 @@ Next, install `@poyoho/eslint-plugin-config`:
 $ npm install eslint-plugin-config --save-dev
 ```
 
+If use in Vue, install `vue-eslint-parser`
+```
+$ npm install vue-eslint-parser --save-dev
+```
+
+If use in TS, install `@typescript-eslint/parser`
+```
+$ npm install @typescript-eslint/parser --save-dev
+```
+
 
 ## Usage
 
-Add `hhh` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `config` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -55,12 +65,22 @@ Or you can use the recommended configuration of rules:
 }
 ```
 
+Or you can use the recommended statistics configuration:
+```json
+{
+  "plugins": [
+    "@poyoho/config"
+  ],
+  "extends": [
+    "plugin:@poyoho/config/stat",
+  ]
+}
+```
 ## Supported Rules
-
+<!-- ☠don't delete -->
+* [ensure-scope-block](./docs/rules/ensure-scope-block.md)
+* [no-binocular-logic](./docs/rules/no-binocular-logic.md)
+* [no-mixin](./docs/rules/no-mixin.md)
 * [no-route-query](./docs/rules/no-route-query.md)
-* [template-function-naming](./docs/rules/template-function-naming)
-
-
-
-
-
+* [teamplate-export-order](./docs/rules/teamplate-export-order.md)
+* [template-function-naming](./docs/rules/template-function-naming.md)

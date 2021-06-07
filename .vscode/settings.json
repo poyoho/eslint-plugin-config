@@ -5,6 +5,7 @@
         "playground",
         "stat",
         "test",
-        "config"
+        "config",
+        "script"
     ]
 }

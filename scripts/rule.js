@@ -6,6 +6,7 @@
  * $TYPE 规则类型(vue/js/ts)
  * $PARSER eslint parser
  */
+const README_DOC = `* [$NAME](./docs/rules/$NAME)`
 // 默认文档
 const DOC =
 `## $DESC ($NAME)
@@ -120,6 +121,16 @@ function hyphenate(str) {
   return str.replace(/\B([A-Z])/g, "-$1").toLowerCase()
 }
 
+// 更新文件内容
+function updateFile(filePath, format) {
+  filePath = path.join(__dirname, "..", filePath)
+  let content = fs.readFileSync(filePath, { encoding: "utf-8" })
+  fs.writeFileSync(
+    filePath,
+    format(content),
+    { encoding: "utf-8" }
+  )
+}
 
 async function input() {
   const $TYPE = (await prompt({
@@ -164,6 +175,7 @@ function genDoc(variables) {
   console.log(chalk.blue("gen doc"))
   const doc = replaceModule(DOC, variables)
   const ruleRoute = replaceModule(DOC_ROUTE, variables)
+  const readme = replaceModule(README_DOC, variables)
   // new doc
   fs.writeFileSync(
     path.join(__dirname, "..", "docs/rules/", variables.$NAME+".md"),
@@ -172,15 +184,18 @@ function genDoc(variables) {
   )
 
   // insert doc route
-  const docRoutePath = path.join(__dirname, "..", "docs/.vitepress/route/rules.js")
-  let docRoute = fs.readFileSync(docRoutePath, { encoding: "utf-8" })
-  docRoute = variables.$TYPE === "vue"
-    ? docRoute.replace("// ☠(dont't delete) VUE INSERT", "// ☠(dont't delete) VUE INSERT\n"+ruleRoute)
-    : docRoute.replace("// ☠(dont't delete) JS INSERT", "// ☠(dont't delete) JS INSERT\n"+ruleRoute)
-  fs.writeFileSync(
-    docRoutePath,
-    docRoute,
-    { encoding: "utf-8" }
+  updateFile(
+    "docs/.vitepress/route/rules.js",
+    (content) => variables.$TYPE === "vue"
+      ? content.replace("// ☠(dont't delete) VUE INSERT", "// ☠(dont't delete) VUE INSERT\n"+ruleRoute)
+      : content.replace("// ☠(dont't delete) JS INSERT", "// ☠(dont't delete) JS INSERT\n"+ruleRoute)
+  )
+
+  // insert readme doc
+  updateFile(
+    "README.md",
+    (content) =>
+      content.replace("<!-- ☠don't delete -->", "<!-- ☠don't delete -->\n"+readme)
   )
 }
 
@@ -189,15 +204,11 @@ function genPlayMain(variables) {
   const playmainImport = replaceModule(PLAYMAIN_IMPORT, variables)
   const playmainInsert = replaceModule(PLAYMAIN_INSERT, variables)
   // playground rules
-  const playgroundRuleScriptPath = path.join(__dirname, "..", `playground/rules/${variables.$TYPE}.ts`)
-  const script = fs.readFileSync(playgroundRuleScriptPath, { encoding: "utf-8" })
-    .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainImport}\n// ${s1}`))
-    .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainInsert}\n// ${s1}`))
-
-  fs.writeFileSync(
-    playgroundRuleScriptPath,
-    script,
-    { encoding: "utf-8" }
+  updateFile(
+    `playground/rules/${variables.$TYPE}.ts`,
+    (content) => content
+      .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainImport}\n// ${s1}`))
+      .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainInsert}\n// ${s1}`))
   )
 }
 
@@ -235,15 +246,11 @@ function genRule(variables) {
   )
 
   // insert rule expot
-  const insertRuleExportPath = path.join(__dirname, "..", "lib/index.ts")
-  let ruleExportContent = fs.readFileSync(insertRuleExportPath, { encoding: "utf-8" })
-  ruleExportContent = variables.$TYPE === "vue"
-    ? ruleExportContent.replace("// ☠(dont't delete) VUE RULE", "// ☠(dont't delete) VUE RULE+\n"+ruleExport)
-    : ruleExportContent.replace("// ☠(dont't delete) JS RULE", "// ☠(dont't delete) JS RULE\n"+ruleExport)
-  fs.writeFileSync(
-    insertRuleExportPath,
-    ruleExportContent,
-    { encoding: "utf-8" }
+  updateFile(
+    "lib/index.ts",
+    (content) => variables.$TYPE === "vue"
+      ? content.replace("// ☠(dont't delete) VUE RULE", "// ☠(dont't delete) VUE RULE+\n"+ruleExport)
+      : content.replace("// ☠(dont't delete) JS RULE", "// ☠(dont't delete) JS RULE\n"+ruleExport)
   )
 }
 
