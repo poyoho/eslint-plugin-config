@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "./src",
+    "module": "es6",
+    "skipLibCheck": true,
+    "declaration": false,
+    // Turn off strict checks to make debugging nicer.
+    "strict": false,
+  },
+  "include": ["./src/*"]
+}

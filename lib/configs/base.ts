@@ -49,8 +49,6 @@ export = {
     "consistent-return": ["error", { treatUndefinedAsUnspecified: true }],
     // 禁止在 else 前有 return
     "no-else-return": "error",
-    // 禁用魔术数字, 但忽略 0、-1、1 三个数字
-    "no-magic-numbers": ["error", { ignore: [0, -1, 1] }],
     // 禁止使用不带 await 表达式的 async 函数
     "require-await": "error",
 
