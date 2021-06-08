@@ -10,7 +10,6 @@ export = {
     "vue",
   ],
   extends: [
-    require.resolve("./base.js"), // 使用编译后的结果
     require.resolve("./basejs.js"), // 使用编译后的结果
     "plugin:vue/recommended" // vue推荐配置
   ],
