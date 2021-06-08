@@ -1,5 +1,5 @@
 import { Rule } from "eslint"
-import { getDisableRecord, collectDisable } from "."
+import { getDisableRecord, collectDisable, collectFileLine } from "."
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -19,6 +19,7 @@ const rule: Rule.RuleModule = {
         }
         let flush = false
         const filename = context.getFilename()
+        collectFileLine(context.getSourceCode().lines.length)
         const record = getDisableRecord(filename)
         node.comments.forEach(comment => {
           if(/eslint-disable(-next-line)?\s{1}/.test(comment.value)) {
