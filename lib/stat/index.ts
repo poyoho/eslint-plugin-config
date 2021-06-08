@@ -26,17 +26,22 @@ export function collectFileLine(count: number) {
   lineCount += count
 }
 
+const fileSet = new Set<string>()
 export function defineStatistics(
   context: Rule.RuleContext,
   cb: (filename: string) => Rule.RuleListener) {
   const filename = context.getFilename()
-  collectFileLine(context.getSourceCode().lines.length)
+  if (!fileSet.has(filename)) {
+    fileSet.add(filename)
+    collectFileLine(context.getSourceCode().lines.length)
+  }
   cb(filename)
 }
 
 // 输出结果
 process.on("exit", () => {
   console.log("⭐ 检测总函数: ", lineCount)
+  console.log("⭐ 检测总文件数: ", fileSet.size)
   console.log("⭐ disable统计")
   const allCount = new Map<string, number>()
   disableMap.forEach((record, filename) => {
