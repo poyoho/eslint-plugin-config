@@ -9,6 +9,7 @@ export default (ruleTester: RuleTester) =>
 
     invalid: [
       {
+        filename: "test.ts",
         code: `
 // eslint-disable-next-line simple-import-sort/imports
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

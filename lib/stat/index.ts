@@ -12,30 +12,37 @@ export function collectDisable(filename: string, record: Counter) {
 }
 
 // 模块引用计数
-const modulesMap = new Map<string, number>()
-export function getMoudleCount(name: string) {
-  return modulesMap.get(name)
-}
-export function collectModule(name: string, record: number) {
-  modulesMap.set(name, record)
+const modulesMap = new Map<string, Counter>()
+export function collectModule(source: string, module: string | string[]) {
+  if (typeof module !== "string") {
+    module.forEach(ele => collectModule(source, ele))
+    return
+  }
+  let record = modulesMap.get(source)
+  if (!record) {
+    record = new Map<string, number>()
+  }
+  const moduleCount = record.get(module)
+  if (moduleCount) {
+    record.set(module, moduleCount + 1)
+  } else {
+    record.set(module, 1)
+  }
+  modulesMap.set(source, record)
 }
 
 // 检测总行数
 let lineCount = 0
-export function collectFileLine(count: number) {
-  lineCount += count
-}
-
 const fileSet = new Set<string>()
 export function defineStatistics(
   context: Rule.RuleContext,
-  cb: (filename: string) => Rule.RuleListener) {
+  rule: Rule.RuleListener) {
   const filename = context.getFilename()
   if (!fileSet.has(filename)) {
     fileSet.add(filename)
-    collectFileLine(context.getSourceCode().lines.length)
+    lineCount += context.getSourceCode().lines.length
   }
-  cb(filename)
+  return rule
 }
 
 // 输出结果

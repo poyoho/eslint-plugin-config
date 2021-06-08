@@ -1,5 +1,5 @@
 import { Rule } from "eslint"
-import { getDisableRecord, collectDisable, collectFileLine } from "."
+import { getDisableRecord, collectDisable, defineStatistics } from "."
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -12,14 +12,13 @@ const rule: Rule.RuleModule = {
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    return {
+    return defineStatistics(context, {
       Program(node) {
         if (!node.comments) {
           return
         }
         let flush = false
         const filename = context.getFilename()
-        collectFileLine(context.getSourceCode().lines.length)
         const record = getDisableRecord(filename)
         node.comments.forEach(comment => {
           if(/eslint-disable(-next-line)?\s{1}/.test(comment.value)) {
@@ -36,7 +35,7 @@ const rule: Rule.RuleModule = {
         })
         flush && collectDisable(filename, record)
       },
-    }
+    })
   }
 }
 

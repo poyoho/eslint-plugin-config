@@ -1,3 +1,4 @@
+// TODO 添加自动生成脚本
 /**
  * 变量
  * $NAME 规则英文名
@@ -6,32 +7,23 @@
  * $TYPE 规则类型(vue/js/ts)
  * $PARSER eslint parser
  */
-const README_DOC = `* [$NAME](./docs/rules/$NAME)`
+const README_DOC = `* [$NAME](./docs/stats/$NAME)`
 // 默认文档
 const DOC =
 `## $DESC ($NAME)
 
 // full it
 
-## 事例
+## 统计数据说明
 
-此规则的**错误**代码示例：
-
-\`\`\`html
 // full it
-\`\`\`
-
-此规则的**正确**代码示例：
-
-\`\`\`html
-// full it
-\`\`\``
+`
 // 文档路由
 const DOC_ROUTE =
-`      {
-        text: "$NAME",
-        link: "/rules/$NAME"
-      },`
+`{
+    text: "$NAME",
+    link: "/stats/$NAME"
+  },`
 // playgrond 引入
 const PLAYMAIN_IMPORT = `import $HUMP from "../../tests/module/$NAME"`
 // playground 插入
@@ -195,7 +187,7 @@ function genDoc(variables) {
   updateFile(
     "README.md",
     (content) =>
-      content.replace("<!-- ☠don't delete RULE -->", "<!-- ☠don't delete RULE -->\n"+readme)
+      content.replace("<!-- ☠don't delete -->", "<!-- ☠don't delete -->\n"+readme)
   )
 }
 

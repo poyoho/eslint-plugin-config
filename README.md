@@ -77,7 +77,7 @@ Or you can use the recommended statistics configuration:
 }
 ```
 ## Supported Rules
-<!-- ☠don't delete -->
+<!-- ☠don't delete RULE -->
 * [ensure-scope-block](./docs/rules/ensure-scope-block.md)
 * [no-binocular-logic](./docs/rules/no-binocular-logic.md)
 * [no-mixin](./docs/rules/no-mixin.md)

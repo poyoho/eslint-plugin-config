@@ -6,8 +6,8 @@ import { RuleTester } from "eslint"
 // import "./nodeMonkey"
 
 // ☠(dont't delete) RULE IMPORT
-import eslintDisable from "../../tests/module/eslint-disable"
-// import moduleCount from "../../tests/module/module-count"
+import moduleCount from "../../tests/module/module-count"
+// import eslintDisable from "../../tests/module/eslint-disable"
 
 // eslint rule 测试容器
 const ruleTester = new RuleTester({
@@ -24,5 +24,5 @@ const ruleTester = new RuleTester({
 })
 
 // ☠(dont't delete) RULE INSERT
-eslintDisable(ruleTester)
-// moduleCount(ruleTester)
+moduleCount(ruleTester)
+// eslintDisable(ruleTester)
