@@ -1,7 +1,6 @@
 export = {
   rules: {
     // ☠(dont't delete) VUE RULE
-    "vue/a-b-c": require("./rules/vue/a-b-c"),
     "vue/no-mixin": require("./rules/vue/no-mixin"),
     "vue/no-route-query": require("./rules/vue/no-route-query"),
     "vue/template-function-naming": require("./rules/vue/template-function-naming"),
