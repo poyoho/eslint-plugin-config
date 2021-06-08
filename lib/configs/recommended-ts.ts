@@ -1,8 +1,8 @@
 import { Linter } from "eslint"
 
 const config: Linter.Config = {
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    parser: require.resolve("@typescript-eslint/parser"),
   },
   plugins: [
     "@typescript-eslint"

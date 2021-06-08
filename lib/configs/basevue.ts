@@ -1,5 +1,5 @@
 export = {
-  parser: require.resolve("vue-eslint-parser"),
+  parser: "vue-eslint-parser",
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: "module",
