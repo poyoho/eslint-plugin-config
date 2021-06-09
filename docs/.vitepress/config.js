@@ -19,14 +19,13 @@ module.exports = {
 
     nav: [
       { text: '首页', link: '/index' },
+      { text: 'rule', link: '/rules/index' },
+      { text: 'stat', link: '/stats/index' },
     ],
 
     sidebar: {
+      "/stats": require("./route/stats"),
       "/": require("./route/rules"),
-      "/stats": {
-        text: "stats"
-        children: require("./route/stat"),
-      },
     }
   }
 }
