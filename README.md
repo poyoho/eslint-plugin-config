@@ -85,7 +85,11 @@ Or you can use the recommended statistics configuration:
 * [teamplate-export-order](./docs/rules/teamplate-export-order.md)
 * [template-function-naming](./docs/rules/template-function-naming.md)
 
+## Supported Stats
+<!-- ☠don't delete STAT -->
+* [module-count](./docs/stats/module-count.md)
+* [eslint-disable](./docs/stats/eslint-disable.md)
+
 ## feature
 
-* stat/function-import
 * write eslint formatter to export eslint result share to `sornaquba`

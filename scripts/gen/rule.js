@@ -5,7 +5,7 @@ const util = require("../utils")
 const teamplate = require("../teamplate/rule")
 
 const __currentname = path.join(__dirname, "..", "..")
-console.log(__currentname)
+
 function genDoc(variables) {
   console.log(chalk.blue("gen doc"))
   const doc = util.replaceModule(teamplate.DOC, variables)
@@ -35,12 +35,12 @@ function genDoc(variables) {
 }
 
 function genPlayMain(variables) {
-  console.log(chalk.blue("replace playground/rules/"))
+  console.log(chalk.blue("replace playground/runner/"))
   const playmainImport = util.replaceModule(teamplate.PLAYMAIN_IMPORT, variables)
   const playmainInsert = util.replaceModule(teamplate.PLAYMAIN_INSERT, variables)
-  // playground rules
+  // playground runner
   util.updateFile(
-    `playground/rules/${variables.$TYPE}.ts`,
+    `playground/runner/${variables.$TYPE}.ts`,
     (content) => content
       .replace(/\/\/ ☠\(dont't delete\) RULE IMPORT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainImport}\n// ${s1}`))
       .replace(/\/\/ ☠\(dont't delete\) RULE INSERT\s*(\S*)/m, (s, s1) => s.replace(s1, `${playmainInsert}\n// ${s1}`))
