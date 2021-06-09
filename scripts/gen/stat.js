@@ -9,7 +9,7 @@ const __currentname = path.join(__dirname, "..", "..")
 function genDoc(variables) {
   console.log(chalk.blue("gen doc"))
   const doc = util.replaceModule(teamplate.DOC, variables)
-  const statRoute = util.replaceModule(teamplate.teamplate._ROUTE, variables)
+  const statRoute = util.replaceModule(teamplate.DOC_ROUTE, variables)
   const readme = util.replaceModule(teamplate.README_DOC, variables)
   // new doc
   fs.writeFileSync(
@@ -74,7 +74,7 @@ function genRule(variables) {
   const ruleExport = util.replaceModule(teamplate.RULE_EXPORT, variables)
   // defalut rule
   fs.writeFileSync(
-    path.join(__currentname, `/lib/stat/${variables.$TYPE}/`, variables.$NAME+".ts"),
+    path.join(__currentname, `/lib/${variables.$TYPE}/`, variables.$NAME+".ts"),
     ruleDefault,
     { encoding: "utf-8" }
   )
