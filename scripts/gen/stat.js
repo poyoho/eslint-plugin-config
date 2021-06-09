@@ -13,7 +13,7 @@ function genDoc(variables) {
   const readme = util.replaceModule(teamplate.README_DOC, variables)
   // new doc
   fs.writeFileSync(
-    path.join(__currentname, "/docs/stats/", variables.$NAME+".md"),
+    path.join(__currentname, "/docs/stats/", variables.$NAME),
     doc,
     { encoding: "utf-8" }
   )
