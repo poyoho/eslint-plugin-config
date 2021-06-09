@@ -4,14 +4,16 @@ const chalk = require("chalk")
 const util = require("../utils")
 const teamplate = require("../teamplate/rule")
 
+const __currentname = path.join(__dirname, "..", "..")
+console.log(__currentname)
 function genDoc(variables) {
   console.log(chalk.blue("gen doc"))
   const doc = util.replaceModule(teamplate.DOC, variables)
-  const ruleRoute = util.replaceModule(teamplate.teamplate._ROUTE, variables)
+  const ruleRoute = util.replaceModule(teamplate.DOC_ROUTE, variables)
   const readme = util.replaceModule(teamplate.README_DOC, variables)
   // new doc
   fs.writeFileSync(
-    path.join(__dirname, "..", "docs/rules/", variables.$NAME+".md"),
+    path.join(__currentname, "/docs/rules/", variables.$NAME+".md"),
     doc,
     { encoding: "utf-8" }
   )
@@ -50,7 +52,7 @@ function genRuleModule(variables) {
   const ruleModule = util.replaceModule(teamplate.RULE_MODULE, variables)
   // rule module
   fs.writeFileSync(
-    path.join(__dirname, "..", "tests/module/", variables.$NAME+".ts"),
+    path.join(__currentname, "/tests/module/", variables.$NAME+".ts"),
     ruleModule,
     { encoding: "utf-8" }
   )
@@ -61,7 +63,7 @@ function genRuleTest(variables) {
   const ruleTest = util.replaceModule(teamplate.RULE_TEST, variables)
   // rule test
   fs.writeFileSync(
-    path.join(__dirname, "..", "tests/lib/rules/", variables.$NAME+".test.ts"),
+    path.join(__currentname, "/tests/lib/rules/", variables.$NAME+".test.ts"),
     ruleTest,
     { encoding: "utf-8" }
   )
@@ -73,7 +75,7 @@ function genRule(variables) {
   const ruleExport = util.replaceModule(teamplate.RULE_EXPORT, variables)
   // defalut rule
   fs.writeFileSync(
-    path.join(__dirname, "..", `lib/rules/${variables.$TYPE}/`, variables.$NAME+".ts"),
+    path.join(__currentname, `/lib/rules/${variables.$TYPE}/`, variables.$NAME+".ts"),
     ruleDefault,
     { encoding: "utf-8" }
   )

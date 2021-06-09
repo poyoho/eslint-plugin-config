@@ -98,6 +98,8 @@ export = rule
 const RULE_EXPORT = `    "$TYPE/$NAME": require("./rules/$TYPE/$NAME"),`
 
 module.exports = {
+  README_DOC,
+  DOC,
   DOC_ROUTE,
   PLAYMAIN_IMPORT,
   PLAYMAIN_INSERT,
