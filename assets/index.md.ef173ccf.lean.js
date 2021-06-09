@@ -1,0 +1,1 @@
+import{o as e,c as r,a as t}from"./app.e8d93e44.js";const a='{"title":"eslint","description":"","frontmatter":{},"headers":[{"level":2,"title":"资源","slug":"资源"}],"relativePath":"index.md","lastUpdated":1623029376284}',l={},n=t('',4);l.render=function(t,a,l,s,i,o){return e(),r("div",null,[n])};export default l;export{a as __pageData};
