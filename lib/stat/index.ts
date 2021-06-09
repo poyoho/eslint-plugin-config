@@ -60,3 +60,9 @@ process.on("exit", () => {
   console.log("⭐ 模块引用统计")
   console.log(modulesMap)
 })
+
+// test Data
+export default {
+  disableMap,
+  modulesMap
+}
