@@ -92,3 +92,13 @@ export = rule
 `
 // 导出新规则
 const RULE_EXPORT = `    "$TYPE/$NAME": require("./stats/$TYPE/$NAME"),`
+
+module.exports = {
+  DOC_ROUTE,
+  PLAYMAIN_IMPORT,
+  PLAYMAIN_INSERT,
+  RULE_MODULE,
+  RULE_TEST,
+  RULE_DEFAULT,
+  RULE_EXPORT,
+}

@@ -95,6 +95,6 @@ function gen(variables) {
   genRule(variables)
 }
 
-export = {
+module.exports = {
   gen
 }

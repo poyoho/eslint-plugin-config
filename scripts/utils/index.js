@@ -81,7 +81,7 @@ function updateFile(filePath, format) {
  * $TYPE 规则类型(vue/js/ts)
  * $PARSER eslint parser
  */
-export = {
+module.exports = {
   input,
   updateFile,
 }
