@@ -8,7 +8,7 @@ export = {
     // ☠(dont't delete) JS RULE
     "js/ensure-scope-block": require("./rules/js/ensure-scope-block"),
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
-    // stat eslint扫描顺便做的统计
+    // ☠(dont't delete) STAT
     "stat/eslint-disable": require("./stat/eslint-disable"),
     "stat/module-count": require("./stat/module-count"),
   },

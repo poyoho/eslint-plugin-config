@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import noRouteQuery from "../../module/no-mixin"
+import noMixin from "../../module/no-mixin"
 
 const ruleTester = new RuleTester({
   parser: require.resolve("vue-eslint-parser"),
@@ -15,5 +15,5 @@ const ruleTester = new RuleTester({
 })
 
 describe("no-mixin", () => {
-  noRouteQuery(ruleTester)
+  noMixin(ruleTester)
 })

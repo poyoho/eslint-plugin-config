@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import noRouteQuery from "../../module/no-binocular-logic"
+import noBinocularLogic from "../../module/no-binocular-logic"
 
 const ruleTester = new RuleTester({
   parser: require.resolve("vue-eslint-parser"),
@@ -15,5 +15,5 @@ const ruleTester = new RuleTester({
 })
 
 describe("no-binocular-logic", () => {
-  noRouteQuery(ruleTester)
+  noBinocularLogic(ruleTester)
 })
