@@ -10,6 +10,7 @@ export = {
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
     // stat eslint扫描顺便做的统计
     "stat/eslint-disable": require("./stat/eslint-disable"),
+    "stat/module-count": require("./stat/module-count"),
   },
   configs: {
     js: require("./configs/recommended-js"),

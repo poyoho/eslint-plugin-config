@@ -2,7 +2,13 @@ import { Rule } from "eslint"
 import * as estree from "estree"
 import path from "path"
 import { collectModule, defineStatistics } from "."
-import { isImportSpecifier, isImportDefaultSpecifier, isImportNamespaceSpecifier } from "../utils/node"
+import {
+  isImportSpecifier,
+  isImportDefaultSpecifier,
+  isImportNamespaceSpecifier,
+  isHasParent,
+  isMemberExpression
+} from "../utils/node"
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -22,27 +28,67 @@ const rule: Rule.RuleModule = {
         if (!pkgName.value) {
           return
         }
-        // TODO source分析路径 ⭐[../../cde, ../cde, ./cde] 这两个包可能是同一个
-        const absolutepath = pkgName.value.toString()
-        imports.forEach(module => collectModule(absolutepath, formatModuleName(module)))
+        console.log(__dirname)
+        const absolutepath = resolveModulePath(
+          context,
+          pkgName.value.toString()
+        )
+        if (imports.length > 0) {
+          imports.forEach(module => collectModule(absolutepath, resolveModuleName(context, module)))
+        } else {
+          collectModule(absolutepath, "ALL")
+        }
       },
     })
   }
 }
 
-// imports 分析 * as any / default / {a,b,c} / []
-function formatModuleName(
+// source分析路径 [../../cde, ../cde, ./cde] 这两个包可能是同一个
+function resolveModulePath(
+  context: Rule.RuleContext,
+  relativePath: string,
+) {
+  const filename = context.getFilename()
+  const isRelativePath = /^\.+\/?\S/
+  const isRootAbsoultPath = /^\.?\//
+  const getAbsolutPath = /.*[\\/]/
+  // import from extern package
+  if (!(
+    isRelativePath.test(relativePath) ||
+    isRootAbsoultPath.test(relativePath)
+  )) {
+    return relativePath
+  }
+  const currAbsPath = getAbsolutPath.exec(filename)![0]
+  return path.resolve(currAbsPath, relativePath)
+}
+
+// imports 分析 * as any / default / {a,b,c}
+function resolveModuleName(
+  context: Rule.RuleContext,
   node: estree.ImportSpecifier | estree.ImportDefaultSpecifier | estree.ImportNamespaceSpecifier
 ) {
+  const sourceCode = context.getSourceCode()
   if (isImportSpecifier(node)) {
     return node.imported.name
   } else if (isImportDefaultSpecifier(node)) {
     return "default"
   } else if (isImportNamespaceSpecifier(node)) {
-    // TODO 找出gg使用的子模块
-    return ["gg", "aa", "cc", "dd"]
+    const collectSubModule = new Set<string>()
+    const variables = context.getDeclaredVariables(node)
+    for(const variable of variables) {
+      for (const refs of variable.references) {
+        if (isHasParent(refs.identifier) && isMemberExpression(refs.identifier.parent)) {
+          collectSubModule.add(sourceCode.getText(refs.identifier.parent))
+        } else {
+          collectSubModule.add("*")
+        }
+      }
+    }
+    return Array.from(collectSubModule.values())
   }
   return ""
 }
 
 export = rule
+
