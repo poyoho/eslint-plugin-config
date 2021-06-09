@@ -130,3 +130,15 @@ export function isForOfStatement(node: estree.Node | undefined): node is estree.
 export function isForStatement(node: estree.Node | undefined): node is estree.ForStatement {
   return node !== undefined && node.type === "ForStatement"
 }
+
+export function isImportSpecifier(node: estree.Node | undefined): node is estree.ImportSpecifier {
+  return node !== undefined && node.type === "ImportSpecifier"
+}
+
+export function isImportDefaultSpecifier(node: estree.Node | undefined): node is estree.ImportDefaultSpecifier {
+  return node !== undefined && node.type === "ImportDefaultSpecifier"
+}
+
+export function isImportNamespaceSpecifier(node: estree.Node | undefined): node is estree.ImportNamespaceSpecifier {
+  return node !== undefined && node.type === "ImportNamespaceSpecifier"
+}

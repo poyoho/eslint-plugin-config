@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import noRouteQuery from "../../module/teamplate-export-order"
+import teamplateExportOrder from "../../module/teamplate-export-order"
 
 const ruleTester = new RuleTester({
   parser: require.resolve("vue-eslint-parser"),
@@ -15,5 +15,5 @@ const ruleTester = new RuleTester({
 })
 
 describe("teamplate-export-order", () => {
-  noRouteQuery(ruleTester)
+  teamplateExportOrder(ruleTester)
 })

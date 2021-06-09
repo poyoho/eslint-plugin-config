@@ -1,7 +1,6 @@
 export = {
   rules: {
     // ☠(dont't delete) VUE RULE
-    "vue/a-b-c": require("./rules/vue/a-b-c"),
     "vue/no-mixin": require("./rules/vue/no-mixin"),
     "vue/no-route-query": require("./rules/vue/no-route-query"),
     "vue/template-function-naming": require("./rules/vue/template-function-naming"),
@@ -9,8 +8,9 @@ export = {
     // ☠(dont't delete) JS RULE
     "js/ensure-scope-block": require("./rules/js/ensure-scope-block"),
     "js/no-binocular-logic": require("./rules/js/no-binocular-logic"),
-    // stat eslint扫描顺便做的统计
+    // ☠(dont't delete) STAT
     "stat/eslint-disable": require("./stat/eslint-disable"),
+    "stat/module-count": require("./stat/module-count"),
   },
   configs: {
     js: require("./configs/recommended-js"),

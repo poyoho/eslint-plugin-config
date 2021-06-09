@@ -1,5 +1,5 @@
 import { Rule } from "eslint"
-import { getDisableRecord, collectDisable } from "."
+import { getDisableRecord, collectDisable, defineStatistics } from "."
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -12,7 +12,7 @@ const rule: Rule.RuleModule = {
   },
   // http://eslint.cn/docs/developer-guide/working-with-rules
   create(context: Rule.RuleContext) {
-    return {
+    return defineStatistics(context, {
       Program(node) {
         if (!node.comments) {
           return
@@ -35,7 +35,7 @@ const rule: Rule.RuleModule = {
         })
         flush && collectDisable(filename, record)
       },
-    }
+    })
   }
 }
 

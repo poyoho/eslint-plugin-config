@@ -1,5 +1,5 @@
 import { RuleTester } from "eslint"
-import noRouteQuery from "../../module/ensure-scope-block"
+import ensureScopeBlock from "../../module/ensure-scope-block"
 
 const ruleTester = new RuleTester({
   parser: require.resolve("vue-eslint-parser"),
@@ -15,5 +15,5 @@ const ruleTester = new RuleTester({
 })
 
 describe("ensure-scope-block", () => {
-  noRouteQuery(ruleTester)
+  ensureScopeBlock(ruleTester)
 })

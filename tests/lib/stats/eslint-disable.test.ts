@@ -1,5 +1,7 @@
+
 import { RuleTester } from "eslint"
-import noBinocularLogic from "../../module/no-binocular-logic"
+import eslintDisable from "../../module/eslint-disable"
+import outData from "../../../lib/stat"
 
 const ruleTester = new RuleTester({
   parser: require.resolve("vue-eslint-parser"),
@@ -14,6 +16,7 @@ const ruleTester = new RuleTester({
   },
 })
 
-describe("no-binocular-logic", () => {
-  noBinocularLogic(ruleTester)
+describe("eslint-disable", () => {
+  eslintDisable(ruleTester)
+  // TODO
 })

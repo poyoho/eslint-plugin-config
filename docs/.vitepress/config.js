@@ -23,6 +23,10 @@ module.exports = {
 
     sidebar: {
       "/": require("./route/rules"),
+      "/stats": {
+        text: "stats"
+        children: require("./route/stat"),
+      },
     }
   }
 }
