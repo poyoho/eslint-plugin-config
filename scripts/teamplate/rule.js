@@ -6,7 +6,7 @@
  * $TYPE 规则类型(vue/js/ts)
  * $PARSER eslint parser
  */
-const README_DOC = `* [$NAME](./docs/rules/$NAME)`
+const README_DOC = `* [$NAME](https://poyoho.github.io/eslint-plugin-config/docs/rules/$NAME)`
 // 默认文档
 const DOC =
 `## $DESC ($NAME)

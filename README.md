@@ -78,17 +78,17 @@ Or you can use the recommended statistics configuration:
 ```
 ## Supported Rules
 <!-- ☠don't delete RULE -->
-* [ensure-scope-block](./docs/rules/ensure-scope-block.md)
-* [no-binocular-logic](./docs/rules/no-binocular-logic.md)
-* [no-mixin](./docs/rules/no-mixin.md)
-* [no-route-query](./docs/rules/no-route-query.md)
-* [teamplate-export-order](./docs/rules/teamplate-export-order.md)
-* [template-function-naming](./docs/rules/template-function-naming.md)
+* [ensure-scope-block](https://poyoho.github.io/eslint-plugin-config/rules/ensure-scope-block.md)
+* [no-binocular-logic](https://poyoho.github.io/eslint-plugin-config/rules/no-binocular-logic.md)
+* [no-mixin](https://poyoho.github.io/eslint-plugin-config/rules/no-mixin.md)
+* [no-route-query](https://poyoho.github.io/eslint-plugin-config/rules/no-route-query.md)
+* [teamplate-export-order](https://poyoho.github.io/eslint-plugin-config/rules/teamplate-export-order.md)
+* [template-function-naming](https://poyoho.github.io/eslint-plugin-config/rules/template-function-naming.md)
 
 ## Supported Stats
 <!-- ☠don't delete STAT -->
-* [module-count](./docs/stats/module-count.md)
-* [eslint-disable](./docs/stats/eslint-disable.md)
+* [module-count](https://poyoho.github.io/eslint-plugin-config/stats/module-count.md)
+* [eslint-disable](https://poyoho.github.io/eslint-plugin-config/stats/eslint-disable.md)
 
 ## feature
 
